@@ -70,6 +70,47 @@
     },
     {
       "type": "header",
+      "content": "Text display"
+    },
+    {
+      "type": "select",
+      "id": "text_position",
+      "label": "Text position",
+      "options": [
+        {
+          "value": "below",
+          "label": "Below image"
+        },
+        {
+          "value": "overlay",
+          "label": "Overlay on image"
+        }
+      ],
+      "default": "below"
+    },
+    {
+      "type": "select",
+      "id": "overlay_color",
+      "label": "Overlay background",
+      "info": "Only applies when text is overlaid on image.",
+      "options": [
+        {
+          "value": "dark",
+          "label": "Dark"
+        },
+        {
+          "value": "light",
+          "label": "Light"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "header",
       "content": "Layout"
     },
     {

@@ -9,10 +9,19 @@
   @param {string} column_span - Number of grid columns to span (1, 2, or 3).
   @param {string} aspect_ratio - CSS aspect-ratio value (e.g. "16 / 9").
   @param {number} image_border_radius - Border radius in px.
+  @param {string} text_position - "below" or "overlay".
+  @param {string} overlay_color - "dark", "light", or "none".
 {%- enddoc -%}
 
+{%- liquid
+  assign is_overlay = false
+  if text_position == 'overlay'
+    assign is_overlay = true
+  endif
+-%}
+
 <li class="mega-menu__column mega-menu__column--span-{{ column_span | default: 2 }}">
-  <{% if link != blank %}a href="{{ link }}"{% else %}div{% endif %} class="mega-menu__promo-card">
+  <{% if link != blank %}a href="{{ link }}"{% else %}div{% endif %} class="mega-menu__promo-card{% if is_overlay %} mega-menu__promo-card--overlay{% endif %}">
     {% if image != blank %}
       <div class="mega-menu__promo-image" style="aspect-ratio: {{ aspect_ratio | default: '16 / 9' }};">
         {{
@@ -24,20 +33,35 @@
             widths: '300, 400, 600, 800',
             class: 'mega-menu__promo-img'
         }}
+        {% if is_overlay and heading != blank or is_overlay and description != blank or is_overlay and link_text != blank %}
+          <div class="mega-menu__promo-overlay mega-menu__promo-overlay--{{ overlay_color | default: 'dark' }}">
+            {% if heading != blank %}
+              <p class="mega-menu__promo-heading">{{ heading }}</p>
+            {% endif %}
+            {% if description != blank %}
+              <p class="mega-menu__promo-description mega-menu__promo-description--overlay">{{ description }}</p>
+            {% endif %}
+            {% if link_text != blank and link != blank %}
+              <span class="mega-menu__promo-cta mega-menu__promo-cta--overlay">{{ link_text }}</span>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
     {% endif %}
-    {% if heading != blank or description != blank or link_text != blank %}
-      <div class="mega-menu__promo-content">
-        {% if heading != blank %}
-          <p class="mega-menu__promo-heading">{{ heading }}</p>
-        {% endif %}
-        {% if description != blank %}
-          <p class="mega-menu__promo-description">{{ description }}</p>
-        {% endif %}
-        {% if link_text != blank and link != blank %}
-          <span class="mega-menu__promo-cta">{{ link_text }}</span>
-        {% endif %}
-      </div>
-    {% endif %}
+    {% unless is_overlay %}
+      {% if heading != blank or description != blank or link_text != blank %}
+        <div class="mega-menu__promo-content">
+          {% if heading != blank %}
+            <p class="mega-menu__promo-heading">{{ heading }}</p>
+          {% endif %}
+          {% if description != blank %}
+            <p class="mega-menu__promo-description">{{ description }}</p>
+          {% endif %}
+          {% if link_text != blank and link != blank %}
+            <span class="mega-menu__promo-cta">{{ link_text }}</span>
+          {% endif %}
+        </div>
+      {% endif %}
+    {% endunless %}
   </{% if link != blank %}a{% else %}div{% endif %}>
 </li>

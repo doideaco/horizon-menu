@@ -6,6 +6,8 @@
   @param {string} column_span - Number of grid columns to span (2, 3, or 4).
   @param {string} aspect_ratio - CSS aspect-ratio value for images.
   @param {boolean} show_price - Whether to show product price.
+  @param {boolean} show_vendor - Whether to show product vendor.
+  @param {string} view_all_label - Label for the view all link.
 {%- enddoc -%}
 
 {%- liquid
@@ -25,11 +27,18 @@
               image_hover: true,
               image_aspect_ratio: aspect_ratio,
               image_sizes: '(min-width: 990px) 200px, 150px',
-              show_price: show_price
+              show_price: show_price,
+              show_vendor: show_vendor
             %}
           </div>
         {% endfor %}
       {% endpaginate %}
     </div>
+    {% if view_all_label != blank and collection.url != blank %}
+      <a href="{{ collection.url }}" class="mega-menu__link mega-menu__view-all" style="margin-top: var(--padding-sm);">
+        <span class="wrap-text">{{ view_all_label }}</span>
+        <span class="mega-menu__view-all-arrow" aria-hidden="true">→</span>
+      </a>
+    {% endif %}
   </li>
 {% endif %}
