@@ -1,0 +1,95 @@
+{%- assign sustain_labels = '' -%}
+
+{%- for t in product.tags -%}
+  {%- if t contains 'sustain' -%}
+    {%- case t -%}
+      {%- when 'sustain-bluesign' -%}
+        {%- assign label = 'Bluesign' -%}
+      {%- when 'sustain-fairtrade' -%}
+        {%- assign label = 'Fairtrade' -%}
+      {%- when 'sustain-renewable' -%}
+        {%- assign label = 'Renewable' -%}
+      {%- when 'sustain-vegan' -%}
+        {%- assign label = 'Vegan' -%}
+      {%- when 'sustain-uk' -%}
+        {%- assign label = 'UK Made' -%}
+      {%- when 'sustain-organic' -%}
+        {%- assign label = 'Organic' -%}
+      {%- when 'sustain-recycled' -%}
+        {%- assign label = 'Recycled' -%}
+      {%- when 'sustain-water' -%}
+        {%- assign label = 'Reduced Water' -%}
+      {%- when 'sustain-traceable' -%}
+        {%- assign label = 'Traceable Down' -%}
+      {%- when 'sustain-durable' -%}
+        {%- assign label = 'Durable' -%}
+      {%- when 'sustain-pfcfree' -%}
+        {%- assign label = 'PFAS Free' -%}
+      {%- when 'sustain-goretex' -%}
+        {%- assign label = 'Goretex' -%}
+      {%- when 'sustain-japan' -%}
+        {%- assign label = 'Japan Made' -%}
+      {%- when 'sustain-hemp' -%}
+        {%- assign label = 'Hemp' -%}
+      {%- else -%}
+        {%- assign label = t | remove: 'sustain-' | capitalize -%}
+    {%- endcase -%}
+
+    {%- assign pair = label | append: '||' | append: t -%}
+    {%- if sustain_labels contains pair -%}{% continue %}{%- endif -%}
+    {%- if sustain_labels != '' -%}{%- assign sustain_labels = sustain_labels | append: '%%' -%}{%- endif -%}
+    {%- assign sustain_labels = sustain_labels | append: pair -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign sustain_pairs = sustain_labels | split: '%%' | sort_natural -%}
+
+{%- if sustain_pairs.first != '' -%}
+  {%- if collection -%}
+    {%- assign base_url = collection.url -%}
+  {%- else -%}
+    {%- assign base_url = routes.all_products_collection_url -%}
+  {%- endif -%}
+
+  <div class="sustain-panel">
+    <h4>Responsible Production Features</h4>
+    <ul class="sustain-list">
+      {%- for item in sustain_pairs -%}
+        {%- assign parts = item | split: '||' -%}
+        {%- assign pretty = parts[0] -%}
+        {%- assign tagval = parts[1] -%}
+        <li><a href="{{ base_url }}?filter.p.tag={{ tagval | url_encode }}">{{ pretty }}</a></li>
+      {%- endfor -%}
+    </ul>
+  </div>
+{%- endif -%}
+
+<style>
+.sustain-panel { padding: 0; }
+.sustain-panel h4 { font-size: 0.75rem; margin: 0 0 .75rem 0; font-weight:400; }
+
+/* Responsive grid: equal blocks, up to 6 per row */
+.sustain-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  max-width: 6fr;
+  gap: .75rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.sustain-list li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 48px;
+  padding: .45rem;
+  border: 1px solid #e8e8e8;
+  border-radius: 4px;
+  text-decoration: none;
+  background: #fff;
+  font-size:0.75rem;
+}
+</style>

@@ -1,0 +1,35 @@
+{%- doc -%}
+  Renders featured product cards from a collection in the mega menu.
+
+  @param {object} collection - The collection to pull products from.
+  @param {number} products_to_show - Number of products to display.
+  @param {string} column_span - Number of grid columns to span (2, 3, or 4).
+  @param {string} aspect_ratio - CSS aspect-ratio value for images.
+  @param {boolean} show_price - Whether to show product price.
+{%- enddoc -%}
+
+{%- liquid
+  assign col_span = column_span | default: 3 | plus: 0
+  assign limit = products_to_show | default: 3
+-%}
+
+{% if collection != blank %}
+  <li class="mega-menu__column mega-menu__column--span-{{ col_span }}">
+    <div class="mega-menu__enhanced-grid">
+      {% paginate collection.products by limit %}
+        {% for product in collection.products %}
+          <div class="mega-menu__enhanced-grid-item">
+            {% render 'resource-card',
+              resource: product,
+              resource_type: 'product',
+              image_hover: true,
+              image_aspect_ratio: aspect_ratio,
+              image_sizes: '(min-width: 990px) 200px, 150px',
+              show_price: show_price
+            %}
+          </div>
+        {% endfor %}
+      {% endpaginate %}
+    </div>
+  </li>
+{% endif %}

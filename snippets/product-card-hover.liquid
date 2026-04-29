@@ -1,0 +1,82 @@
+{% assign all_variants = product.variants %}
+
+{% if all_variants.size > 0 %}
+
+  <style>
+  .card-gallery {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .product-card-variants {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px;
+    background: rgba(0, 0, 0, 0.85);
+    color: #fff;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 10;
+    pointer-events: none;
+  }
+
+  .card-gallery:hover .product-card-variants {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .product-card-variants__inner {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .product-card-variants__label {
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    opacity: 0.6;
+  }
+
+  .product-card-variants__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 8px;
+  }
+
+  .variant-chip {
+    font-size: 12px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 3px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    white-space: nowrap;
+  }
+
+  .variant-chip.is-sold-out {
+    opacity: 0.35;
+    text-decoration: line-through;
+    background: transparent;
+  }
+</style>
+
+  <div class="product-card-variants">
+    <div class="product-card-variants__inner">
+      <span class="product-card-variants__label">Sizes</span>
+
+      <div class="product-card-variants__list">
+        {% for variant in all_variants %}
+          <span class="variant-chip {% unless variant.available %}is-sold-out{% endunless %}">
+            {{ variant.option1 }}
+          </span>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+{% endif %}

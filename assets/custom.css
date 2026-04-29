@@ -1,0 +1,25 @@
+[ref="priceContainer"] .price,
+[ref="priceContainer"] .price .money {
+  font-size: 1rem !important; /* 18px */
+}
+@media screen and (min-width: 990px) {
+  .collection-wrapper {
+    --facets-vertical-col-width: 4;
+  }
+}
+
+.gm-links>.gm-heading, .gm-products-carousel .gm-heading, .gm-products-grid .gm-heading, .gm-products-list .gm-heading {
+    padding: 4px 0;
+}
+
+.gm-submenu {
+    padding: 20px;
+}
+
+.gm-links>li.gm-heading>.gm-target, .gm-links>li.gm-heading>a {
+    padding: 2px 0;
+}
+
+.gm-menu-installed .gm-menu .gm-grid {
+    gap: 20px;
+}

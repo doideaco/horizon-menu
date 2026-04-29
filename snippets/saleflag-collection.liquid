@@ -1,0 +1,84 @@
+{% assign v = product.selected_or_first_available_variant %}
+{% assign today_timestamp = 'now' | date: "%s" | plus: 0 %}
+{% assign four_weeks_ago_timestamp = today_timestamp | minus: 2419200 %}
+{% assign product_created_at_timestamp = product.created_at | date: "%s" | plus: 0 %}
+
+{% if product.tags contains 'low' %}
+  <div class="saleflag saleflag--low">
+    <a href="https://www.urbanindustry.co.uk/discount/LAST10/?redirect=/products/{{ product.handle }}">Use code LAST10</a>
+  </div>
+{% elsif product.tags contains 'CLEAR' %}
+  <div class="saleflag saleflag--clear">Clearance</div>
+{% elsif product.tags contains 'Conv' %}
+  <div class="saleflag saleflag--conv">
+    Use <a href="https://www.urbanindustry.co.uk/discount/CONV10/?redirect=/products/{{ product.handle }}"><span>CONV10</span></a> for 10% off this product for a ltd time
+  </div>
+{% elsif product_created_at_timestamp >= four_weeks_ago_timestamp %}
+  <div class="saleflag saleflag--new">New</div>
+{% elsif v.compare_at_price > v.price %}
+  <div class="saleflag saleflag--sale">
+    {% assign discount = v.compare_at_price | minus: v.price %}
+    {% assign discount_percentage = discount | times: 100 | divided_by: v.compare_at_price %}
+    {{ discount_percentage | round }}% Off
+  </div>
+{% endif %}
+
+<style>
+  /* Base styles shared by all flags */
+  .saleflag {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 9px;
+    color: white;
+    border-radius: 3px;
+    padding: 4px 6px;
+    z-index: 100;
+    line-height: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .saleflag a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .saleflag a:hover {
+    text-decoration: underline;
+  }
+
+  /* Low stock / LAST10 - amber, urgency without alarm */
+  .saleflag--low {
+    background: #e08600 !important;
+  }
+
+  /* Clearance - red, signals final reduction */
+  .saleflag--clear {
+    background: #cc2200 !important;
+  }
+
+  /* Conv10 promo - purple, feels promotional/exclusive */
+  .saleflag--conv {
+    background: #6a3bbf !important;
+  }
+
+  /* New arrivals - your existing green */
+  .saleflag--new {
+    background:rgb(3, 3, 3) !important;
+  }
+
+  /* Sale / % off - teal, distinct from red clearance */
+  .saleflag--sale {
+    background: #008891 !important;
+  }
+
+  @media screen and (min-width: 990px) {
+    .product__modal-opener .product__media-icon {
+      opacity: 0;
+      display: none;
+      pointer-events: none;
+    }
+  }
+</style>

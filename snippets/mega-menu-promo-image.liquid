@@ -1,0 +1,43 @@
+{%- doc -%}
+  Renders a promotional image card in the mega menu grid.
+
+  @param {object} image - The image object from image_picker.
+  @param {string} heading - Card heading text.
+  @param {string} description - Card description text.
+  @param {string} link - URL the card links to.
+  @param {string} link_text - CTA button/link text.
+  @param {string} column_span - Number of grid columns to span (1, 2, or 3).
+  @param {string} aspect_ratio - CSS aspect-ratio value (e.g. "16 / 9").
+  @param {number} image_border_radius - Border radius in px.
+{%- enddoc -%}
+
+<li class="mega-menu__column mega-menu__column--span-{{ column_span | default: 2 }}">
+  <{% if link != blank %}a href="{{ link }}"{% else %}div{% endif %} class="mega-menu__promo-card">
+    {% if image != blank %}
+      <div class="mega-menu__promo-image" style="aspect-ratio: {{ aspect_ratio | default: '16 / 9' }};">
+        {{
+          image
+          | image_url: width: 800
+          | image_tag:
+            loading: 'lazy',
+            sizes: '(min-width: 990px) 400px, 300px',
+            widths: '300, 400, 600, 800',
+            class: 'mega-menu__promo-img'
+        }}
+      </div>
+    {% endif %}
+    {% if heading != blank or description != blank or link_text != blank %}
+      <div class="mega-menu__promo-content">
+        {% if heading != blank %}
+          <p class="mega-menu__promo-heading">{{ heading }}</p>
+        {% endif %}
+        {% if description != blank %}
+          <p class="mega-menu__promo-description">{{ description }}</p>
+        {% endif %}
+        {% if link_text != blank and link != blank %}
+          <span class="mega-menu__promo-cta">{{ link_text }}</span>
+        {% endif %}
+      </div>
+    {% endif %}
+  </{% if link != blank %}a{% else %}div{% endif %}>
+</li>

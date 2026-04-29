@@ -1,0 +1,41 @@
+{%- liquid
+  assign std_str = std | default: '79.95'
+  assign nd_str  = nd  | default: '149.95'
+  assign threshold_standard = std_str | replace: ',', '.' | times: 100 | round
+  assign threshold_nextday  = nd_str  | replace: ',', '.' | times: 100 | round
+  assign cart_total    = cart.total_price
+  assign cart_currency = cart.currency.iso_code
+-%}
+
+<div class="free-shipping-banner"
+     data-free-shipping-banner
+     data-thr-std="{{ threshold_standard }}"
+     data-thr-nd="{{ threshold_nextday }}"
+     data-cur="{{ cart_currency | escape }}">
+  <div class="shipping-prompt" data-fsb-text>
+    {%- if cart_total > 0 -%}
+      {%- if cart_total < threshold_standard -%}
+        <p>You're only <span>{{ threshold_standard | minus: cart_total | money }}</span> away from free <em>standard</em> shipping</p>
+      {%- elsif cart_total < threshold_nextday -%}
+        <p>👍 You're only <span>{{ threshold_nextday | minus: cart_total | money }}</span> away from free <em>next day</em> shipping</p>
+      {%- else -%}
+        <p>🎉 You qualify for free next day shipping</p>
+      {%- endif -%}
+    {%- else -%}
+       <p>You're only <span>{{ threshold_standard | minus: cart_total | money }}</span> away from free <em>standard</em> shipping</p>
+    {%- endif -%}
+  </div>
+</div>
+
+<style>
+.free-shipping-banner .shipping-prompt{
+  background:rgb(203 232 219);
+  padding:10px;text-align:center;
+  border-radius:4px;max-width:50rem;
+  margin:0; 
+  font-size:11.5px;
+  letter-spacing:0.0125em;
+  text-transform: uppercase;
+}
+.free-shipping-banner .shipping-prompt p{ margin:0 }
+</style>

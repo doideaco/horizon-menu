@@ -1,0 +1,663 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "product-information",
+      "blocks": {
+        "media-gallery": {
+          "type": "_product-media-gallery",
+          "static": true,
+          "settings": {
+            "media_presentation": "grid",
+            "media_columns": "two",
+            "image_gap": 4,
+            "large_first_image": false,
+            "icons_style": "chevron",
+            "slideshow_controls_style": "dots",
+            "slideshow_mobile_controls_style": "dots",
+            "thumbnail_position": "right",
+            "thumbnail_width": 44,
+            "thumbnail_radius": 0,
+            "aspect_ratio": "adapt",
+            "constrain_to_viewport": false,
+            "media_fit": "contain",
+            "media_radius": 0,
+            "extend_media": false,
+            "zoom": true,
+            "video_loop": false,
+            "hide_variants": true,
+            "padding-block-start": 0,
+            "padding-block-end": 11,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "product-details": {
+          "type": "_product-details",
+          "static": true,
+          "settings": {
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "details_position": "flex-start",
+            "gap": 12,
+            "sticky_details_desktop": true,
+            "inherit_color_scheme": true,
+            "color_scheme": "scheme-1",
+            "background_media": "none",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 24,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "group_icgrde": {
+              "type": "group",
+              "name": "Header",
+              "settings": {
+                "content_direction": "column",
+                "vertical_on_mobile": true,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 0,
+                "width": "fill",
+                "custom_width": 100,
+                "width_mobile": "fill",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "background_media": "none",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "custom_liquid_mQzWRY": {
+                  "type": "custom-liquid",
+                  "name": "t:names.custom_liquid",
+                  "settings": {
+                    "custom_liquid": "<span style=\"display:block; margin:-24px 0 0 0; text-transform:uppercase\">\n{% render 'linktobrand' %}\n</span>"
+                  },
+                  "blocks": {}
+                },
+                "custom_liquid_MYKch4": {
+                  "type": "custom-liquid",
+                  "name": "Title with colour",
+                  "settings": {
+                    "custom_liquid": "<h1 style=\"font-size:1.5rem\">{{ product.title | escape }}</h1><h2 style=\"font-weight:normal; font-size:0.9rem; margin-top:-8px\">{% if product.variants[2].option3 %}{{ product.variants[2].option3 }}{% else %}{{ product.variants[0].option3 }}{% endif %}</h2>\n                <a href=\"{{ product.url }}\" class=\"product__title\">\n                  \n                </a>"
+                  },
+                  "blocks": {}
+                },
+                "product_title_eYVzTU": {
+                  "type": "product-title",
+                  "name": "t:names.title",
+                  "disabled": true,
+                  "settings": {
+                    "width": "fit-content",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "color": "var(--color-foreground)",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "price_tVjtKg": {
+                  "type": "price",
+                  "settings": {
+                    "show_sale_price_first": true,
+                    "show_installments": true,
+                    "show_tax_info": false,
+                    "type_preset": "h5",
+                    "width": "100%",
+                    "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
+                    "padding-block-start": 4,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "custom_liquid_DpaHxk": {
+                  "type": "custom-liquid",
+                  "name": "Price pill",
+                  "disabled": true,
+                  "settings": {
+                    "custom_liquid": "{% assign v = product.selected_or_first_available_variant %}\n\n<div class=\"price-with-pill\">\n  <span class=\"price\">{{ v.price | money }}</span>\n\n  {% if v.compare_at_price > v.price %}\n    {% assign discount = v.compare_at_price | minus: v.price %}\n    {% assign discount_percentage = discount | times: 100 | divided_by: v.compare_at_price %}\n\n    <span class=\"discount-pill\">\n      -{{ discount_percentage | round }}%\n    </span>\n  {% endif %}\n</div>"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "custom_liquid_mQzWRY",
+                "custom_liquid_MYKch4",
+                "product_title_eYVzTU",
+                "price_tVjtKg",
+                "custom_liquid_DpaHxk"
+              ]
+            },
+            "divider_VJhene": {
+              "type": "_divider",
+              "name": "t:names.divider",
+              "settings": {
+                "thickness": 1,
+                "corner_radius": "square",
+                "width_percent": 100,
+                "padding-block-start": 0,
+                "padding-block-end": 0
+              },
+              "blocks": {}
+            },
+            "variant_picker_R3rGDr": {
+              "type": "variant-picker",
+              "settings": {
+                "variant_style": "buttons",
+                "show_swatches": false,
+                "alignment": "left",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "custom_liquid_aegapD": {
+              "type": "custom-liquid",
+              "name": "Hide brand color variant",
+              "settings": {
+                "custom_liquid": "<script>\n(function () {\n  function hideBrandColour(root = document) {\n    root.querySelectorAll('.variant-option').forEach(fs => {\n      const legend = fs.querySelector('legend');\n      if (legend && legend.textContent.trim().toLowerCase() === 'brand colour') {\n        fs.style.display = 'none';\n      }\n    });\n  }\n\n  // Run once on page load\n  if (document.readyState === 'loading') {\n    document.addEventListener('DOMContentLoaded', () => hideBrandColour());\n  } else {\n    hideBrandColour();\n  }\n\n  // Run again if Shopify dynamically re-renders variant pickers\n  const observer = new MutationObserver(() => hideBrandColour());\n  observer.observe(document.body, { childList: true, subtree: true });\n})();\n</script>"
+              },
+              "blocks": {}
+            },
+            "buy_buttons_eYQEYi": {
+              "type": "buy-buttons",
+              "settings": {
+                "stacking": true,
+                "show_pickup_availability": false,
+                "gift_card_form": true,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "quantity": {
+                  "type": "quantity",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                },
+                "add-to-cart": {
+                  "type": "add-to-cart",
+                  "static": true,
+                  "settings": {
+                    "style_class": "button"
+                  },
+                  "blocks": {}
+                },
+                "accelerated-checkout": {
+                  "type": "accelerated-checkout",
+                  "disabled": true,
+                  "static": true,
+                  "settings": {},
+                  "blocks": {}
+                }
+              },
+              "block_order": []
+            },
+            "custom_liquid_qwUadG": {
+              "type": "custom-liquid",
+              "name": "Free shipping",
+              "settings": {
+                "custom_liquid": "{% render 'freeshipping', std: '79.95', nd: '149.95', currency: 'GBP' %}\n<script src=\"{{ 'free-shipping-banner.js' | asset_url }}\" defer></script>"
+              },
+              "blocks": {}
+            },
+            "custom_liquid_83pWHx": {
+              "type": "custom-liquid",
+              "name": "Klarna",
+              "settings": {
+                "custom_liquid": "{% render 'klarna' %}"
+              },
+              "blocks": {}
+            },
+            "swish_formerly_wishlist_king_wishlist_button_block_AHY3WH": {
+              "type": "shopify://apps/swish-wishlist-king/blocks/wishlist-button-block/194f5011-a43c-4b22-b12e-eaf20dc4506a",
+              "settings": {
+                "button_style": "outline_accent_1",
+                "button_alignment": "center",
+                "button_content_alignment": "center",
+                "button_margin_top": 0,
+                "button_margin_bottom": 0,
+                "button_max_width": 0,
+                "button_padding_horizontal": 15,
+                "button_full_width": true,
+                "button_show_text": true,
+                "button_show_icon": true,
+                "icon_size": 18,
+                "icon_stroke_width": 1,
+                "icon_offset_vertical": 0
+              }
+            },
+            "text_aEtTtq": {
+              "type": "text",
+              "name": "Product description",
+              "disabled": true,
+              "settings": {
+                "text": "{{ closest.product.description }}",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-primary--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "custom_liquid_RBLNpQ": {
+              "type": "custom-liquid",
+              "name": "Also available",
+              "settings": {
+                "custom_liquid": "{% capture activebrand %}{{ product.vendor | handleize }}{% endcapture %}\n{% capture currentproduct %}{{ product.title }}{% endcapture %}\n{% capture currenthandle %}{{ product.handle }}{% endcapture %}\n\n{% assign matching_products = '' %}\n\n{% if collections[activebrand].products.size > 1 %}\n  {% paginate collections[activebrand].products by 250 %}\n    {% for product in collections[activebrand].products %}\n      {% if product.title == currentproduct and product.handle != currenthandle %}\n        {% assign matching_products = matching_products | append: product.handle | append: ',' %}\n      {% endif %}\n    {% endfor %}\n  {% endpaginate %}\n{% endif %}\n\n{% assign matching_count = matching_products | split: ',' | size | minus: 1 %}\n\n{% if matching_count > 0 %}\n<div class=\"also-available-outer\">\n\n  <div class=\"also-available\">\n    {% paginate collections[activebrand].products by 250 %}\n      {% for product in collections[activebrand].products %}\n        {% if product.title == currentproduct and product.handle != currenthandle %}\n          <div>\n            <a href=\"{{ product.url }}\"> \n              <img src=\"{{ product.featured_image | product_img_url: '300x', format: 'pjpg' }}\"\n                   class=\"lazy\"\n                   data-src=\"{{ product.featured_image | product_img_url: '300x', format: 'pjpg' }}\"\n                   alt=\"{{ product.title }}\"\n                   title=\"{{ product.title }} - {{ product.variants[2].option3 }}\"\n                   height=\"200\"\n                   width=\"200\">\n            </a>\n          </div>\n        {% endif %}\n      {% endfor %}\n    {% endpaginate %}\n  </div>\n\n  <h3>Also available in</h3>\n\n</div>\n{% endif %}\n\n<style>\n\n  .also-available-outer {\n    display:flex;\n    flex-direction: column-reverse;\n    margin:10px 0;\n    padding:0;\n  }\n\n\n\n  .also-available-outer h3, .rebuy-widget .primary-title, #rebuy-widget-136162 .primary-title, .rebuy-widget .primary-title:first-letter, .related-products__heading {\n    letter-spacing: -0.03rem;\n    line-height: 1.1 !important    font-size:12px;\n    color: #222 !important;\n    font-size: 0.9rem;\n    margin:0 0 10px 0;\n  }\n  \n  .also-available {\n    width:100%;\n    max-width:50rem;\n    display:grid;\n    grid-template-columns:repeat(4,1fr);\n    gap:5px;\n  }\n  .also-available img {\n    width:100%;\n    height:auto;\n  }\n  .also-available-outer h3:empty { display:none }\n  \n</style>"
+              },
+              "blocks": {}
+            },
+            "accordion_X3djmi": {
+              "type": "accordion",
+              "name": "t:names.accordion",
+              "settings": {
+                "icon": "caret",
+                "dividers": true,
+                "type_preset": "h6",
+                "inherit_color_scheme": true,
+                "color_scheme": "",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "accordion_row_bVCiTa": {
+                  "type": "_accordion-row",
+                  "name": "t:names.accordion_row",
+                  "settings": {
+                    "heading": "Product description",
+                    "open_by_default": true,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_FntVen": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>{{ closest.product.description }}</p>",
+                        "width": "100%",
+                        "max_width": "none",
+                        "alignment": "left",
+                        "type_preset": "custom",
+                        "font": "var(--font-body--family)",
+                        "font_size": "0.75rem",
+                        "line_height": "loose",
+                        "letter_spacing": "tight",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_FntVen"
+                  ]
+                },
+                "accordion_row_GkR3Pw": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Shipping",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_qK9Ypf": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<h3><strong>UK Shipping</strong></h3><p><a href=\"https://www.urbanindustry.co.uk/pages/uk-shipping\">Click here</a> for our UK shipping rates - Standard, Free and Next Day Options. All orders placed Monday - Friday before 15:00pm GMT will be dispatched same day.</p><h3><strong>EU Shipping</strong></h3><p>We sell to EU Countries with ALL DUTIES PAID. (DDP) Urban Industry now take care of all of your own countries TAX, Duties and Admin Fees so you can just order and take delivery! There are NO EXTRA FEES to pay other than the price you see and the shipping.</p><p>We ship to almost all of Europe using DHL. All Euro prices are now FREE of UK VAT.</p><p><a href=\"https://www.urbanindustry.co.uk/pages/european-shipping\">European Shipping rates - Click here</a></p><h3><strong>Worldwide Shipping</strong></h3><p>We ship around the world FAST using DHL.</p><p><a href=\"https://www.urbanindustry.co.uk/pages/worldwide_shipping_1\">World Wide Shipping rates - Click here</a></p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_qK9Ypf"
+                  ]
+                },
+                "accordion_row_wYyVgi": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Returns",
+                    "open_by_default": false,
+                    "icon": "none",
+                    "width": 20
+                  },
+                  "blocks": {
+                    "text_JEb7iz": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<h3>UK Returns</h3><h3>Returns Period</h3><p>We allow 18 days from point of arrival with you to return your order to us. For hygiene reasons we cannot accept returns for underwear, cosmetics or socks unless faulty. For our full <a href=\"https://www.urbanindustry.co.uk/pages/uk_returns\">UK returns policy click here</a></p><p>If you are not completely satisfied with your purchase or need to return an item for any reason, simply return the items to us in their original condition and packaging within 18 days of receipt and we will issue you with a refund/exchange or store credit</p><p><a href=\"https://www.urbanindustry.co.uk/a/returns\">Click here</a> to use our returns portal to track the items back to us</p><h3>International Returns</h3><p>If you are not completely satisfied with your purchase or need to return an item for any reason, simply return the items to us in their original condition and packaging within 18 days of delivery to you and we will issue you with a refund</p><p><a href=\"https://www.urbanindustry.co.uk/pages/international-returns\">Click here</a> for more information on returns</p>",
+                        "width": "100%",
+                        "max_width": "normal",
+                        "alignment": "left",
+                        "type_preset": "rte",
+                        "font": "var(--font-body--family)",
+                        "font_size": "1rem",
+                        "line_height": "normal",
+                        "letter_spacing": "normal",
+                        "case": "none",
+                        "wrap": "pretty",
+                        "color": "var(--color-foreground)",
+                        "background": false,
+                        "background_color": "#00000026",
+                        "corner_radius": 0,
+                        "padding-block-start": 0,
+                        "padding-block-end": 0,
+                        "padding-inline-start": 0,
+                        "padding-inline-end": 0
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_JEb7iz"
+                  ]
+                }
+              },
+              "block_order": [
+                "accordion_row_bVCiTa",
+                "accordion_row_GkR3Pw",
+                "accordion_row_wYyVgi"
+              ]
+            },
+            "custom_liquid_9XJhtq": {
+              "type": "custom-liquid",
+              "name": "Sustainability",
+              "settings": {
+                "custom_liquid": "{% render 'sustain' %}"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "group_icgrde",
+            "divider_VJhene",
+            "variant_picker_R3rGDr",
+            "custom_liquid_aegapD",
+            "buy_buttons_eYQEYi",
+            "custom_liquid_qwUadG",
+            "custom_liquid_83pWHx",
+            "swish_formerly_wishlist_king_wishlist_button_block_AHY3WH",
+            "text_aEtTtq",
+            "custom_liquid_RBLNpQ",
+            "accordion_X3djmi",
+            "custom_liquid_9XJhtq"
+          ]
+        }
+      },
+      "custom_css": [
+        "/* Stop utility wrappers becoming flex rows (and receiving the parent's gap) */.layout-panel-flex--column > div:has(> script),.layout-panel-flex--column > div:has(> style) {display: contents;}",
+        "[data-testid=\"variant-option-single\"],[data-testid=\"variant-option-single-value\"] {display: none;}"
+      ],
+      "settings": {
+        "content_width": "content-center-aligned",
+        "desktop_media_position": "left",
+        "equal_columns": false,
+        "limit_details_width": false,
+        "gap": 20,
+        "enable_sticky_add_to_cart": true,
+        "color_scheme": "",
+        "padding-block-start": 10,
+        "padding-block-end": 30
+      }
+    },
+    "product_recommendations_qggXJq": {
+      "type": "product-recommendations",
+      "blocks": {
+        "text_cbcgyb": {
+          "type": "text",
+          "name": "t:names.header",
+          "settings": {
+            "text": "<h3>You may also like </h3>",
+            "width": "fit-content",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h4",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "color": "",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "static-product-card": {
+          "type": "_product-card",
+          "name": "t:names.product_card",
+          "static": true,
+          "settings": {
+            "product_card_gap": 8,
+            "inherit_color_scheme": true,
+            "color_scheme": "",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 8,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "product_card_gallery_DNizbJ": {
+              "type": "_product-card-gallery",
+              "name": "t:names.product_card_media",
+              "settings": {
+                "image_ratio": "adapt",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "product_title_M7MJkb": {
+              "type": "product-title",
+              "name": "t:names.product_title",
+              "settings": {
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "color": "var(--color-foreground)",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 4,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "price_gLWgA6": {
+              "type": "price",
+              "settings": {
+                "show_sale_price_first": true,
+                "show_installments": false,
+                "show_tax_info": false,
+                "type_preset": "h6",
+                "width": "100%",
+                "alignment": "left",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "color": "var(--color-foreground)",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "product_card_gallery_DNizbJ",
+            "product_title_M7MJkb",
+            "price_gLWgA6"
+          ]
+        }
+      },
+      "block_order": [
+        "text_cbcgyb"
+      ],
+      "name": "t:names.product_recommendations",
+      "settings": {
+        "product": "{{ closest.product }}",
+        "recommendation_type": "related",
+        "layout_type": "grid",
+        "carousel_on_mobile": false,
+        "max_products": 8,
+        "columns": 4,
+        "mobile_columns": "2",
+        "columns_gap": 12,
+        "rows_gap": 16,
+        "icons_style": "arrow",
+        "icons_shape": "none",
+        "section_width": "page-width",
+        "gap": 28,
+        "color_scheme": "scheme-1",
+        "padding-block-start": 48,
+        "padding-block-end": 48
+      }
+    }
+  },
+  "order": [
+    "main",
+    "product_recommendations_qggXJq"
+  ]
+}

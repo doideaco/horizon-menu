@@ -1,0 +1,54 @@
+{%- doc -%}
+  Renders a grid of collection cards in the mega menu.
+
+  @param {object} collection_1 - First collection object.
+  @param {object} collection_2 - Second collection object.
+  @param {object} collection_3 - Third collection object.
+  @param {object} collection_4 - Fourth collection object.
+  @param {string} column_span - Number of grid columns to span (2, 3, or 4).
+  @param {string} aspect_ratio - CSS aspect-ratio value for images.
+  @param {boolean} show_title - Whether to show collection titles.
+  @param {number} image_border_radius - Border radius in px.
+{%- enddoc -%}
+
+{%- liquid
+  assign collections_array = '' | split: ''
+  if collection_1 != blank
+    assign collections_array = collections_array | push: collection_1
+  endif
+  if collection_2 != blank
+    assign collections_array = collections_array | push: collection_2
+  endif
+  if collection_3 != blank
+    assign collections_array = collections_array | push: collection_3
+  endif
+  if collection_4 != blank
+    assign collections_array = collections_array | push: collection_4
+  endif
+
+  assign col_span = column_span | default: 3 | plus: 0
+  assign collection_count = collections_array.size
+-%}
+
+{% if collection_count > 0 %}
+  <li class="mega-menu__column mega-menu__column--span-{{ col_span }}">
+    <div class="mega-menu__enhanced-grid" style="--resource-card-corner-radius: {{ image_border_radius | default: 0 }}px;">
+      {% for collection_item in collections_array %}
+        <div class="mega-menu__enhanced-grid-item">
+          {% render 'resource-card',
+            resource: collection_item,
+            resource_type: 'collection',
+            style: 'overlay',
+            image_aspect_ratio: aspect_ratio,
+            image_sizes: '(min-width: 990px) 300px, 200px'
+          %}
+          {% if show_title and collection_item.title != blank %}
+            <a href="{{ collection_item.url }}" class="mega-menu__link" style="margin-top: var(--padding-xs);">
+              <span class="wrap-text">{{ collection_item.title }}</span>
+            </a>
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
+  </li>
+{% endif %}

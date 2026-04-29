@@ -1,0 +1,118 @@
+{% assign today_timestamp = 'now' | date: "%s" | plus: 0 %}
+{% assign four_weeks_ago_timestamp = today_timestamp | minus: 2419200 %}
+{% assign product_created_at_timestamp = product.created_at | date: "%s" | plus: 0 %}
+
+{% if product.tags contains 'low' %}
+  <div class="saleflag saleflag--low">
+    <a href="https://www.urbanindustry.co.uk/discount/LAST10/?redirect=/products/{{ product.handle }}">Use Last10 for 10% off</a>
+  </div>
+
+{% elsif product.tags contains 'CLEAR' %}
+  <div class="saleflag saleflag--clear">Clearance</div>
+
+{% elsif product.tags contains 'GETCODE' %}
+  <div class="saleflag saleflag--conv">Use code GET15 for 15% off</div>
+
+{% elsif product_created_at_timestamp >= four_weeks_ago_timestamp %}
+  <div class="saleflag saleflag--new">New</div>
+
+{% elsif product.compare_at_price > product.price %}
+  <div class="saleflag saleflag--sale">
+    {% assign discount_percentage = product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | round %}
+    {{ discount_percentage }}% Off
+  </div>
+{% endif %}
+
+<style>
+  /* Base styles shared by all flags */
+  .saleflag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-size: 11px;
+    color: white;
+    border-radius: 3px;
+    padding: 8px 8px 6px 8px;
+    z-index: 1;
+    line-height: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+  }
+
+  .saleflag a {
+    color: white;
+    text-decoration: none;
+  }
+
+  .saleflag a:hover {
+    text-decoration: underline;
+  }
+
+  /* Low stock / LAST10 - amber */
+  .saleflag--low {
+    background: #e08600;
+  }
+
+  /* Clearance - red */
+  .saleflag--clear {
+    background: #cc2200;
+  }
+
+  /* Promo code (GETCODE/GET15) - purple */
+  .saleflag--conv {
+    background: #6a3bbf;
+  }
+
+  /* New arrivals - green */
+  .saleflag--new {
+    background: #060606ff;
+  }
+
+  /* Sale / % off - teal */
+  .saleflag--sale {
+    background: #008891;
+  }
+
+  /* GLOBAL UTILITIES */
+  .card__badge {
+    display: none !important;
+  }
+
+  @media screen and (min-width: 990px) {
+    .product__modal-opener .product__media-icon {
+      opacity: 0;
+      display: none;
+      pointer-events: none;
+    }
+  }
+
+  .googlepromo {
+    display: none;
+  }
+
+  .googlepromo.showpromo {
+    display: block;
+  }
+
+  @media screen and (max-width: 600px) {
+    .googlepromo {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+function checkQueryParamAndSetClass(parameterName, className) {
+    const queryString = window.location.search;
+    const regex = new RegExp('[?&]' + parameterName + '(=([^&#]*)|&|#|$)');
+    if (regex.test(queryString)) {
+        const promoElement = document.querySelector('.googlepromo');
+        if (promoElement) {
+            promoElement.classList.add(className);
+        }
+    }
+}
+
+checkQueryParamAndSetClass('promo', 'showpromo');
+</script>

@@ -1,0 +1,560 @@
+{% doc %}
+  @prompt
+    A section that runs a product using a product picker and links up the product on the left and a youtube short on the right, the right hand panel should respect the aspect ratio of a youtube short and use the rest of the available page for the product block, provide all the standard block settings like full or page width, background colours (from theme) and make it 100% by default, the container shoudl be 100%, color scheme is not working on the section background, give us the option to toggle product description on or off, make the product image fill the available space in the cotainer and make the title and price half their size, no youve stacked the layout the short should be either on the left or the right depdning on the layout setting, we want a horizontal layout this is vertical
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-product-video-{{ ai_gen_id }} {
+    width: 100%;
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-1 {
+    background-color: rgb({{ settings.color_schemes.scheme-1.settings.background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-1.settings.foreground | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-2 {
+    background-color: rgb({{ settings.color_schemes.scheme-2.settings.background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-2.settings.foreground | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-3 {
+    background-color: rgb({{ settings.color_schemes.scheme-3.settings.background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-3.settings.foreground | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-4 {
+    background-color: rgb({{ settings.color_schemes.scheme-4.settings.background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-4.settings.foreground | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-5 {
+    background-color: rgb({{ settings.color_schemes.scheme-5.settings.background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-5.settings.foreground | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-container-{{ ai_gen_id }} {
+    {% if block.settings.container_width == 'full' %}
+      width: 100%;
+      max-width: none;
+      padding: 0 20px;
+    {% else %}
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    {% endif %}
+  }
+
+  .ai-product-video-content-{{ ai_gen_id }} {
+    display: flex;
+    {% if block.settings.layout == 'video_left' %}
+      flex-direction: row;
+    {% else %}
+      flex-direction: row;
+    {% endif %}
+    gap: 40px;
+    align-items: stretch;
+    min-height: 640px;
+    padding: {{ block.settings.padding_top }}px 0 {{ block.settings.padding_bottom }}px;
+  }
+
+  .ai-product-video-product-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .ai-product-video-image-{{ ai_gen_id }} {
+    width: 100%;
+    height: 400px;
+    flex-grow: 1;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    overflow: hidden;
+  }
+
+  .ai-product-video-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .ai-product-video-image-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .ai-product-video-image-placeholder-{{ ai_gen_id }} svg {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
+  .ai-product-video-empty-state-{{ ai_gen_id }} {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 20px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    pointer-events: none;
+  }
+
+  .ai-product-video-info-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex-shrink: 0;
+  }
+
+  .ai-product-video-title-{{ ai_gen_id }} {
+    font-size: 24px;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-1 .ai-product-video-title-{{ ai_gen_id }} {
+    color: rgb({{ settings.color_schemes.scheme-1.settings.foreground_heading | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-2 .ai-product-video-title-{{ ai_gen_id }} {
+    color: rgb({{ settings.color_schemes.scheme-2.settings.foreground_heading | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-3 .ai-product-video-title-{{ ai_gen_id }} {
+    color: rgb({{ settings.color_schemes.scheme-3.settings.foreground_heading | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-4 .ai-product-video-title-{{ ai_gen_id }} {
+    color: rgb({{ settings.color_schemes.scheme-4.settings.foreground_heading | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-5 .ai-product-video-title-{{ ai_gen_id }} {
+    color: rgb({{ settings.color_schemes.scheme-5.settings.foreground_heading | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-price-{{ ai_gen_id }} {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .ai-product-video-description-{{ ai_gen_id }} {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .ai-product-video-button-{{ ai_gen_id }} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 32px;
+    border: none;
+    border-radius: {{ block.settings.button_border_radius }}px;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-1 .ai-product-video-button-{{ ai_gen_id }} {
+    background-color: rgb({{ settings.color_schemes.scheme-1.settings.primary_button_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-1.settings.primary_button_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-1 .ai-product-video-button-{{ ai_gen_id }}:hover {
+    background-color: rgb({{ settings.color_schemes.scheme-1.settings.primary_button_hover_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-1.settings.primary_button_hover_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-2 .ai-product-video-button-{{ ai_gen_id }} {
+    background-color: rgb({{ settings.color_schemes.scheme-2.settings.primary_button_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-2.settings.primary_button_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-2 .ai-product-video-button-{{ ai_gen_id }}:hover {
+    background-color: rgb({{ settings.color_schemes.scheme-2.settings.primary_button_hover_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-2.settings.primary_button_hover_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-3 .ai-product-video-button-{{ ai_gen_id }} {
+    background-color: rgb({{ settings.color_schemes.scheme-3.settings.primary_button_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-3.settings.primary_button_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-3 .ai-product-video-button-{{ ai_gen_id }}:hover {
+    background-color: rgb({{ settings.color_schemes.scheme-3.settings.primary_button_hover_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-3.settings.primary_button_hover_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-4 .ai-product-video-button-{{ ai_gen_id }} {
+    background-color: rgb({{ settings.color_schemes.scheme-4.settings.primary_button_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-4.settings.primary_button_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-4 .ai-product-video-button-{{ ai_gen_id }}:hover {
+    background-color: rgb({{ settings.color_schemes.scheme-4.settings.primary_button_hover_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-4.settings.primary_button_hover_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-5 .ai-product-video-button-{{ ai_gen_id }} {
+    background-color: rgb({{ settings.color_schemes.scheme-5.settings.primary_button_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-5.settings.primary_button_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-{{ ai_gen_id }}.color-scheme-5 .ai-product-video-button-{{ ai_gen_id }}:hover {
+    background-color: rgb({{ settings.color_schemes.scheme-5.settings.primary_button_hover_background | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+    color: rgb({{ settings.color_schemes.scheme-5.settings.primary_button_hover_text | color_to_rgb | remove: 'rgb(' | remove: ')' }});
+  }
+
+  .ai-product-video-youtube-{{ ai_gen_id }} {
+    width: 360px;
+    height: 640px;
+    border-radius: {{ block.settings.video_border_radius }}px;
+    overflow: hidden;
+    background-color: #000;
+    position: relative;
+    flex-shrink: 0;
+    {% if block.settings.layout == 'video_left' %}
+      order: -1;
+    {% endif %}
+  }
+
+  .ai-product-video-youtube-{{ ai_gen_id }} iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  .ai-product-video-youtube-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 100%;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .ai-product-video-youtube-placeholder-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    color: #666;
+  }
+
+  .ai-product-video-youtube-empty-text-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    max-width: 200px;
+  }
+
+  .ai-product-video-empty-product-{{ ai_gen_id }} {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #666;
+    flex: 1;
+    min-height: 400px;
+  }
+
+  .ai-product-video-empty-product-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+  }
+
+  @media screen and (max-width: 990px) {
+    .ai-product-video-content-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .ai-product-video-youtube-{{ ai_gen_id }} {
+      width: 100%;
+      max-width: 360px;
+      margin: 0 auto;
+      order: 0;
+    }
+
+    .ai-product-video-image-{{ ai_gen_id }} {
+      height: 300px;
+    }
+
+    .ai-product-video-title-{{ ai_gen_id }} {
+      font-size: 20px;
+    }
+
+    .ai-product-video-price-{{ ai_gen_id }} {
+      font-size: 16px;
+    }
+  }
+
+  @media screen and (max-width: 749px) {
+    .ai-product-video-container-{{ ai_gen_id }} {
+      padding: 0 15px;
+    }
+
+    .ai-product-video-content-{{ ai_gen_id }} {
+      gap: 25px;
+      padding: {{ block.settings.padding_top | times: 0.7 }}px 0 {{ block.settings.padding_bottom | times: 0.7 }}px;
+    }
+
+    .ai-product-video-title-{{ ai_gen_id }} {
+      font-size: 18px;
+    }
+
+    .ai-product-video-price-{{ ai_gen_id }} {
+      font-size: 14px;
+    }
+
+    .ai-product-video-youtube-{{ ai_gen_id }} {
+      height: 480px;
+    }
+
+    .ai-product-video-image-{{ ai_gen_id }} {
+      height: 250px;
+    }
+  }
+{% endstyle %}
+
+<div
+  class="ai-product-video-{{ ai_gen_id }} color-{{ block.settings.color_scheme }}"
+  {{ block.shopify_attributes }}
+>
+  <div class="ai-product-video-container-{{ ai_gen_id }}">
+    <div class="ai-product-video-content-{{ ai_gen_id }}">
+      {% if block.settings.product != blank %}
+        <div class="ai-product-video-product-{{ ai_gen_id }}">
+          <div class="ai-product-video-image-{{ ai_gen_id }}">
+            {% if block.settings.product.featured_image %}
+              <img
+                src="{{ block.settings.product.featured_image | image_url: width: 800 }}"
+                alt="{{ block.settings.product.featured_image.alt | escape }}"
+                loading="lazy"
+                width="{{ block.settings.product.featured_image.width }}"
+                height="{{ block.settings.product.featured_image.height }}"
+              >
+            {% else %}
+              <div class="ai-product-video-image-placeholder-{{ ai_gen_id }}">
+                {{ 'product-1' | placeholder_svg_tag }}
+              </div>
+            {% endif %}
+          </div>
+
+          <div class="ai-product-video-info-{{ ai_gen_id }}">
+            <h2 class="ai-product-video-title-{{ ai_gen_id }}">{{ block.settings.product.title }}</h2>
+            
+            {% if block.settings.product.price %}
+              <div class="ai-product-video-price-{{ ai_gen_id }}">
+                {{ block.settings.product.price | money }}
+              </div>
+            {% endif %}
+
+            {% if block.settings.show_description and block.settings.product.description != blank %}
+              <div class="ai-product-video-description-{{ ai_gen_id }}">
+                {{ block.settings.product.description | truncate: 200 }}
+              </div>
+            {% endif %}
+
+            <a
+              href="{{ block.settings.product.url }}"
+              class="ai-product-video-button-{{ ai_gen_id }}"
+            >
+              {{ block.settings.button_text }}
+            </a>
+          </div>
+        </div>
+      {% else %}
+        <div class="ai-product-video-empty-product-{{ ai_gen_id }}">
+          {{ 'product-1' | placeholder_svg_tag }}
+          <div>
+            <h3>Select a product</h3>
+            <p>Choose a product to showcase alongside your video</p>
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="ai-product-video-youtube-{{ ai_gen_id }}">
+        {% if block.settings.youtube_url != blank %}
+          {% assign video_id = block.settings.youtube_url | split: 'v=' | last | split: '&' | first %}
+          {% if video_id == block.settings.youtube_url %}
+            {% assign video_id = block.settings.youtube_url | split: 'youtu.be/' | last | split: '?' | first %}
+          {% endif %}
+          {% if video_id == block.settings.youtube_url %}
+            {% assign video_id = block.settings.youtube_url | split: 'shorts/' | last | split: '?' | first %}
+          {% endif %}
+          <iframe
+            src="https://www.youtube.com/embed/{{ video_id }}?autoplay=0&mute=1&controls=1&rel=0&modestbranding=1"
+            title="YouTube video player"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        {% else %}
+          <div class="ai-product-video-youtube-placeholder-{{ ai_gen_id }}">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M23.498 6.186a2.999 2.999 0 0 0-2.109-2.109C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.389.577A2.999 2.999 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a2.999 2.999 0 0 0 2.109 2.109C4.495 20.5 12 20.5 12 20.5s7.505 0 9.389-.577a2.999 2.999 0 0 0 2.109-2.109C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.75 15.568V8.432L15.5 12l-5.75 3.568z"/>
+            </svg>
+            <div class="ai-product-video-youtube-empty-text-{{ ai_gen_id }}">
+              Add a YouTube Shorts URL to display your video
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Product video showcase",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube Shorts URL"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_description",
+      "label": "Show product description",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        {
+          "value": "video_left",
+          "label": "Video left, product right"
+        },
+        {
+          "value": "video_right",
+          "label": "Product left, video right"
+        }
+      ],
+      "default": "video_right"
+    },
+    {
+      "type": "select",
+      "id": "container_width",
+      "label": "Container width",
+      "options": [
+        {
+          "value": "page",
+          "label": "Page width"
+        },
+        {
+          "value": "full",
+          "label": "Full width"
+        }
+      ],
+      "default": "full"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Product image border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "video_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Video border radius",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "button_border_radius",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "unit": "px",
+      "label": "Button border radius",
+      "default": 8
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product video showcase"
+    }
+  ],
+  "tag": null
+}
+{% endschema %}

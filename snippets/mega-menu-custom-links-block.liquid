@@ -1,0 +1,92 @@
+{%- doc -%}
+  Renders a custom links column in the mega menu.
+
+  @param {string} heading - Column heading text.
+  @param {string} link_1_url - URL for link 1.
+  @param {string} link_1_label - Label for link 1.
+  @param {string} link_2_url - URL for link 2.
+  @param {string} link_2_label - Label for link 2.
+  @param {string} link_3_url - URL for link 3.
+  @param {string} link_3_label - Label for link 3.
+  @param {string} link_4_url - URL for link 4.
+  @param {string} link_4_label - Label for link 4.
+  @param {string} link_5_url - URL for link 5.
+  @param {string} link_5_label - Label for link 5.
+  @param {string} link_6_url - URL for link 6.
+  @param {string} link_6_label - Label for link 6.
+  @param {string} column_span - Number of grid columns to span (1 or 2).
+{%- enddoc -%}
+
+{%- liquid
+  assign col_span = column_span | default: 1
+  assign has_links = false
+  if link_1_url != blank and link_1_label != blank
+    assign has_links = true
+  elsif link_2_url != blank and link_2_label != blank
+    assign has_links = true
+  elsif link_3_url != blank and link_3_label != blank
+    assign has_links = true
+  elsif link_4_url != blank and link_4_label != blank
+    assign has_links = true
+  elsif link_5_url != blank and link_5_label != blank
+    assign has_links = true
+  elsif link_6_url != blank and link_6_label != blank
+    assign has_links = true
+  endif
+-%}
+
+{% if has_links or heading != blank %}
+  <li class="mega-menu__column mega-menu__column--span-{{ col_span }}">
+    <div>
+      {% if heading != blank %}
+        <span class="mega-menu__link mega-menu__link--parent">
+          <span class="wrap-text">{{ heading }}</span>
+        </span>
+      {% endif %}
+      <ul class="list-unstyled">
+        {% if link_1_url != blank and link_1_label != blank %}
+          <li>
+            <a href="{{ link_1_url }}" class="mega-menu__link">
+              <span class="wrap-text">{{ link_1_label }}</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if link_2_url != blank and link_2_label != blank %}
+          <li>
+            <a href="{{ link_2_url }}" class="mega-menu__link">
+              <span class="wrap-text">{{ link_2_label }}</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if link_3_url != blank and link_3_label != blank %}
+          <li>
+            <a href="{{ link_3_url }}" class="mega-menu__link">
+              <span class="wrap-text">{{ link_3_label }}</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if link_4_url != blank and link_4_label != blank %}
+          <li>
+            <a href="{{ link_4_url }}" class="mega-menu__link">
+              <span class="wrap-text">{{ link_4_label }}</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if link_5_url != blank and link_5_label != blank %}
+          <li>
+            <a href="{{ link_5_url }}" class="mega-menu__link">
+              <span class="wrap-text">{{ link_5_label }}</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if link_6_url != blank and link_6_label != blank %}
+          <li>
+            <a href="{{ link_6_url }}" class="mega-menu__link">
+              <span class="wrap-text">{{ link_6_label }}</span>
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+  </li>
+{% endif %}

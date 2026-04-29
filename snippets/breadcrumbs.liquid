@@ -1,0 +1,107 @@
+{% unless template.name == 'index' %}
+
+  <div class="page-width-wide">
+    <nav class="breadcrumbs" aria-label="Breadcrumbs">
+      <a href="{{ routes.root_url }}">Home</a>
+
+      {% case request.page_type %}
+
+        {% when 'product' %}
+          {% assign breadcrumb_collection = nil %}
+
+          {% if collection %}
+            {% assign breadcrumb_collection = collection %}
+          {% elsif product.collections.size > 0 %}
+            {% for c in product.collections %}
+              {% if c.title == 'All Gifts' %}
+                {% assign breadcrumb_collection = c %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+            {% if breadcrumb_collection == nil %}
+              {% assign breadcrumb_collection = product.collections.first %}
+            {% endif %}
+          {% endif %}
+
+          {% if breadcrumb_collection %}
+            &rsaquo;
+            <a href="{{ breadcrumb_collection.url }}">{{ breadcrumb_collection.title }}</a>
+          {% endif %}
+
+          {% if product.type != blank %}
+            &rsaquo;
+            <a href="/collections/{{ product.type | handleize }}">{{ product.type }}</a>
+          {% endif %}
+
+          {% if product.vendor != blank %}
+            &rsaquo;
+            <a href="{{ product.vendor | url_for_vendor }}">{{ product.vendor }}</a>
+          {% endif %}
+
+          &rsaquo;
+          {{ product.title }}
+
+        {% when 'collection' %}
+          &rsaquo;
+          {{ collection.title }}
+
+        {% when 'page' %}
+          &rsaquo;
+          {{ page.title }}
+
+        {% when 'blog' %}
+          &rsaquo;
+          {{ blog.title }}
+
+        {% when 'article' %}
+          &rsaquo;
+          <a href="{{ blog.url }}">{{ blog.title }}</a>
+          &rsaquo;
+          {{ article.title }}
+
+        {% when 'cart' %}
+          &rsaquo;
+          Cart
+
+        {% when 'search' %}
+          &rsaquo;
+          Search
+
+        {% when '404' %}
+          &rsaquo;
+          Page not found
+
+        {% else %}
+          {% if page_title != blank %}
+            &rsaquo;
+            {{ page_title }}
+          {% endif %}
+
+      {% endcase %}
+    </nav>
+  </div>
+
+  <style>
+    .breadcrumbs {
+      font-size: 0.75rem;
+      margin: 20px 0 -10px 0;
+      padding-left: var(--page-margin);
+      padding-right: var(--page-margin);
+      opacity:0.8;
+    }
+
+    .breadcrumbs a {
+      color: initial;
+      text-decoration: none;
+      text-transform: capitalize;
+    }
+
+    @media screen and (max-width: 800px) {
+      .breadcrumbs {
+        display: none;
+      }
+    }
+  </style>
+
+{% endunless %}

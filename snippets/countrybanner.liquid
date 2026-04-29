@@ -1,0 +1,118 @@
+{% for currency in shop.enabled_currencies %}
+	{% if currency == cart.currency %}
+		{% capture location %}{{ currency.iso_code }}{% endcapture %}
+	{% endif %}
+{% endfor %}
+
+
+{% case location %}
+
+{% when 'USD' %}
+
+<div class="country-banner usa-banner">  
+  <span class="flag-icon">🇺🇸</span>
+  <div class="cb-desktop">USA - Hassle Free shopping $10 Flat Rate</div>
+  <div class="cb-mobile">USA - $10 Flat Rate</div> 
+</div>
+
+
+{% when 'AUD' %}
+
+<div class="country-banner australia-banner">  
+  <span class="flag-icon">🇦🇺</span>
+  <div class="cb-desktop">$19.95 DHL Express Shipping - Spend over $150</div>
+  <div class="cb-mobile">$19.95 DHL Express Shipping - Spend over $150</div> 
+</div>
+
+
+{% when 'EUR' %}
+
+<div class="country-banner eu-banner">  
+  <span class="flag-icon">🇪🇺</span>
+  <div class="cb-desktop">€10 Shipping - ALL DUTIES/TAX PAID</div>
+  <div class="cb-mobile">€10 Shipping - ALL DUTIES/TAX PAID</div> 
+</div>
+
+
+{% when 'HKD' %}
+
+<div class="country-banner hongkong-banner">  
+  <span class="flag-icon">🇭🇰</span>
+  <div class="cb-desktop">Hong Kong - FAST & Hassle Free DHL Express shipping</div>
+  <div class="cb-mobile">Hong Kong - FAST DHL Express Shipping Rate</div>  
+</div>
+
+
+{% when 'DKK' %}
+
+<div class="country-banner denmark-banner">  
+  <span class="flag-icon">🇩🇰</span>
+  <div class="cb-desktop">Danmark - Fast forsendelsespris 125Kr</div>
+  <div class="cb-mobile">Danmark - Fast forsendelsespris 125Kr</div>  
+</div>
+
+
+{% when 'JPY' %}
+
+<div class="country-banner japan-banner">  
+  <span class="flag-icon">🇯🇵</span>
+  <div class="cb-desktop">日本-手間のかからないJP¥3000からの無料ショッピング定額-高速配送</div>
+  <div class="cb-mobile">日本-JP¥3000から定額料金-高速配送</div>  
+</div>
+
+
+{% when 'NZD' %}
+
+<div class="country-banner newzealand-banner">  
+  <span class="flag-icon">🇳🇿</span>
+  <div class="cb-desktop">New Zealand - Hassle Free and Fast DHL Express shipping $19.95 Flat Rate</div>
+  <div class="cb-mobile">New Zealand - $19.95 Flat Rate - Fast DHL Shipping</div>  
+</div>
+
+
+{% else %}
+
+<!-- do nothing -->
+
+{% endcase %}
+
+<style>
+
+.country-banner {
+ text-align:center; 
+ padding:0.15rem;
+ font-size:0.8rem;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background:#CBBAA0;
+}
+
+.flag-icon {
+  font-size:16px;
+  display:inline-block;
+  vertical-align:middle;
+  margin-right:8px;
+}
+
+.usa-banner {
+ background:#CBBAA0;
+}
+
+.cb-mobile {
+  display:none;
+}
+
+@media screen and (max-width: 800px) {
+	
+  .cb-desktop {
+    display:none;
+  }
+
+  .cb-mobile {
+    display:block;
+  }
+
+}
+  
+</style>
