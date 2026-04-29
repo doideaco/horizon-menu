@@ -909,7 +909,8 @@
   .mega-menu__heading {
     grid-column: 1 / -1;
     margin: 0;
-    padding-block-end: var(--padding-xs);
+    padding-block-end: 0;
+    margin-block-end: var(--padding-2xs);
     font-family: var(--menu-parent-font-family);
     font-style: var(--menu-parent-font-style);
     font-weight: 700;
@@ -917,7 +918,6 @@
     line-height: var(--menu-parent-font-line-height);
     text-transform: var(--menu-parent-font-case);
     color: var(--color-foreground);
-    border-block-end: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
   }
 
   /* Overflow ("More") panel heading: align with the right-hand grid column
@@ -925,7 +925,6 @@
      Slotted into the overflow-list shadow DOM but styled here in light DOM. */
   .mega-menu__heading--overflow {
     grid-column: 2;
-    margin-block-end: var(--padding-md);
   }
 
   .mega-menu__column {
