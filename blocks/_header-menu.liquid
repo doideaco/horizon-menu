@@ -116,23 +116,282 @@
                 style="{% render 'submenu-font-styles', settings: block_settings %} --mega-menu-h-gap: {{ block_settings.mega_menu_horizontal_gap | default: 'var(--gap-2xl)' }}; --mega-menu-v-gap: {{ block_settings.mega_menu_vertical_gap | default: 'var(--gap-xl)' }}; --mega-menu-padding: {{ block_settings.mega_menu_padding | default: 'var(--padding-lg)' }};"
               >
                 {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
+                {% liquid
+                  assign link_title_lower = link.title | strip | downcase
+                  assign has_enhancements = false
+                  for child_block in block.blocks
+                    assign child_title = child_block.settings.menu_item_title | strip | downcase
+                    if child_title == link_title_lower
+                      assign has_enhancements = true
+                    endif
+                  endfor
+                %}
                 <div class="mega-menu section section--full-width-margin section--{{ section.settings.section_width }}">
                   <div
                     class="mega-menu__grid"
                     data-menu-grid-id="{{ list_id }}"
                   >
-                    {% render 'mega-menu-list',
-                      parent_link: link,
-                      id: list_id,
-                      section: section,
-                      grid_columns_count: block_settings.mega_menu_columns | default: 6,
-                      grid_columns_count_tablet: block_settings.mega_menu_columns_tablet | default: 4,
-                      grid_columns_count_collection_images: 8,
-                      menu_content_type: menu_content_type,
-                      content_aspect_ratio: ratio,
-                      image_border_radius: image_border_radius,
-                      links_before_wrap_setting: block_settings.mega_menu_links_per_column
-                    %}
+                    {%- if has_enhancements -%}
+                      {%- comment -%} Render 'start' position enhancement blocks {%- endcomment -%}
+                      {% for child_block in block.blocks %}
+                        {% assign child_title = child_block.settings.menu_item_title | strip | downcase %}
+                        {% if child_title == link_title_lower and child_block.settings.position == 'start' %}
+                          {% case child_block.type %}
+                            {% when '_mega-menu-promo-image' %}
+                              {% render 'mega-menu-promo-image',
+                                image: child_block.settings.image,
+                                heading: child_block.settings.heading,
+                                description: child_block.settings.description,
+                                link: child_block.settings.link,
+                                link_text: child_block.settings.link_text,
+                                column_span: child_block.settings.column_span,
+                                aspect_ratio: child_block.settings.aspect_ratio,
+                                image_border_radius: image_border_radius,
+                                text_position: child_block.settings.text_position,
+                                overlay_color: child_block.settings.overlay_color
+                              %}
+                            {% when '_mega-menu-custom-links' %}
+                              {% render 'mega-menu-custom-links-block',
+                                heading: child_block.settings.heading,
+                                heading_url: child_block.settings.heading_url,
+                                link_1_url: child_block.settings.link_1_url,
+                                link_1_label: child_block.settings.link_1_label,
+                                link_2_url: child_block.settings.link_2_url,
+                                link_2_label: child_block.settings.link_2_label,
+                                link_3_url: child_block.settings.link_3_url,
+                                link_3_label: child_block.settings.link_3_label,
+                                link_4_url: child_block.settings.link_4_url,
+                                link_4_label: child_block.settings.link_4_label,
+                                link_5_url: child_block.settings.link_5_url,
+                                link_5_label: child_block.settings.link_5_label,
+                                link_6_url: child_block.settings.link_6_url,
+                                link_6_label: child_block.settings.link_6_label,
+                                link_7_url: child_block.settings.link_7_url,
+                                link_7_label: child_block.settings.link_7_label,
+                                link_8_url: child_block.settings.link_8_url,
+                                link_8_label: child_block.settings.link_8_label,
+                                link_9_url: child_block.settings.link_9_url,
+                                link_9_label: child_block.settings.link_9_label,
+                                link_10_url: child_block.settings.link_10_url,
+                                link_10_label: child_block.settings.link_10_label,
+                                view_all_url: child_block.settings.view_all_url,
+                                view_all_label: child_block.settings.view_all_label,
+                                column_span: child_block.settings.column_span
+                              %}
+                            {% when '_mega-menu-collection-list' %}
+                              {% render 'mega-menu-collection-list-block',
+                                collection_1: child_block.settings.collection_1,
+                                collection_2: child_block.settings.collection_2,
+                                collection_3: child_block.settings.collection_3,
+                                collection_4: child_block.settings.collection_4,
+                                collection_5: child_block.settings.collection_5,
+                                collection_6: child_block.settings.collection_6,
+                                column_span: child_block.settings.column_span,
+                                aspect_ratio: child_block.settings.aspect_ratio,
+                                show_title: child_block.settings.show_title,
+                                image_border_radius: child_block.settings.image_border_radius,
+                                view_all_url: child_block.settings.view_all_url,
+                                view_all_label: child_block.settings.view_all_label
+                              %}
+                            {% when '_mega-menu-featured-products' %}
+                              {% render 'mega-menu-featured-products-block',
+                                collection: child_block.settings.collection,
+                                products_to_show: child_block.settings.products_to_show,
+                                column_span: child_block.settings.column_span,
+                                aspect_ratio: child_block.settings.aspect_ratio,
+                                show_price: child_block.settings.show_price,
+                                show_vendor: child_block.settings.show_vendor,
+                                view_all_label: child_block.settings.view_all_label
+                              %}
+                            {% when '_mega-menu-brand-grid' %}
+                              {% render 'mega-menu-brand-grid-block',
+                                heading: child_block.settings.heading,
+                                brand_1_image: child_block.settings.brand_1_image,
+                                brand_1_url: child_block.settings.brand_1_url,
+                                brand_1_label: child_block.settings.brand_1_label,
+                                brand_2_image: child_block.settings.brand_2_image,
+                                brand_2_url: child_block.settings.brand_2_url,
+                                brand_2_label: child_block.settings.brand_2_label,
+                                brand_3_image: child_block.settings.brand_3_image,
+                                brand_3_url: child_block.settings.brand_3_url,
+                                brand_3_label: child_block.settings.brand_3_label,
+                                brand_4_image: child_block.settings.brand_4_image,
+                                brand_4_url: child_block.settings.brand_4_url,
+                                brand_4_label: child_block.settings.brand_4_label,
+                                brand_5_image: child_block.settings.brand_5_image,
+                                brand_5_url: child_block.settings.brand_5_url,
+                                brand_5_label: child_block.settings.brand_5_label,
+                                brand_6_image: child_block.settings.brand_6_image,
+                                brand_6_url: child_block.settings.brand_6_url,
+                                brand_6_label: child_block.settings.brand_6_label,
+                                brand_7_image: child_block.settings.brand_7_image,
+                                brand_7_url: child_block.settings.brand_7_url,
+                                brand_7_label: child_block.settings.brand_7_label,
+                                brand_8_image: child_block.settings.brand_8_image,
+                                brand_8_url: child_block.settings.brand_8_url,
+                                brand_8_label: child_block.settings.brand_8_label,
+                                column_span: child_block.settings.column_span,
+                                logo_size: child_block.settings.logo_size,
+                                logos_per_row: child_block.settings.logos_per_row,
+                                grayscale: child_block.settings.grayscale
+                              %}
+                            {% when '_mega-menu-cta-banner' %}
+                              {% render 'mega-menu-cta-banner-block',
+                                heading: child_block.settings.heading,
+                                description: child_block.settings.description,
+                                button_text: child_block.settings.button_text,
+                                button_url: child_block.settings.button_url,
+                                background_image: child_block.settings.background_image,
+                                color_scheme: child_block.settings.color_scheme,
+                                column_span: child_block.settings.column_span
+                              %}
+                          {% endcase %}
+                        {% endif %}
+                      {% endfor %}
+
+                      {%- comment -%} Render nav links (text-only when enhanced) {%- endcomment -%}
+                      {% render 'mega-menu-list',
+                        parent_link: link,
+                        id: list_id,
+                        section: section,
+                        grid_columns_count: block_settings.mega_menu_columns | default: 6,
+                        grid_columns_count_tablet: block_settings.mega_menu_columns_tablet | default: 4,
+                        menu_content_type: 'text',
+                        image_border_radius: image_border_radius,
+                        links_before_wrap_setting: block_settings.mega_menu_links_per_column
+                      %}
+
+                      {%- comment -%} Render 'end' position enhancement blocks {%- endcomment -%}
+                      {% for child_block in block.blocks %}
+                        {% assign child_title = child_block.settings.menu_item_title | strip | downcase %}
+                        {% if child_title == link_title_lower and child_block.settings.position != 'start' %}
+                          {% case child_block.type %}
+                            {% when '_mega-menu-promo-image' %}
+                              {% render 'mega-menu-promo-image',
+                                image: child_block.settings.image,
+                                heading: child_block.settings.heading,
+                                description: child_block.settings.description,
+                                link: child_block.settings.link,
+                                link_text: child_block.settings.link_text,
+                                column_span: child_block.settings.column_span,
+                                aspect_ratio: child_block.settings.aspect_ratio,
+                                image_border_radius: image_border_radius,
+                                text_position: child_block.settings.text_position,
+                                overlay_color: child_block.settings.overlay_color
+                              %}
+                            {% when '_mega-menu-custom-links' %}
+                              {% render 'mega-menu-custom-links-block',
+                                heading: child_block.settings.heading,
+                                heading_url: child_block.settings.heading_url,
+                                link_1_url: child_block.settings.link_1_url,
+                                link_1_label: child_block.settings.link_1_label,
+                                link_2_url: child_block.settings.link_2_url,
+                                link_2_label: child_block.settings.link_2_label,
+                                link_3_url: child_block.settings.link_3_url,
+                                link_3_label: child_block.settings.link_3_label,
+                                link_4_url: child_block.settings.link_4_url,
+                                link_4_label: child_block.settings.link_4_label,
+                                link_5_url: child_block.settings.link_5_url,
+                                link_5_label: child_block.settings.link_5_label,
+                                link_6_url: child_block.settings.link_6_url,
+                                link_6_label: child_block.settings.link_6_label,
+                                link_7_url: child_block.settings.link_7_url,
+                                link_7_label: child_block.settings.link_7_label,
+                                link_8_url: child_block.settings.link_8_url,
+                                link_8_label: child_block.settings.link_8_label,
+                                link_9_url: child_block.settings.link_9_url,
+                                link_9_label: child_block.settings.link_9_label,
+                                link_10_url: child_block.settings.link_10_url,
+                                link_10_label: child_block.settings.link_10_label,
+                                view_all_url: child_block.settings.view_all_url,
+                                view_all_label: child_block.settings.view_all_label,
+                                column_span: child_block.settings.column_span
+                              %}
+                            {% when '_mega-menu-collection-list' %}
+                              {% render 'mega-menu-collection-list-block',
+                                collection_1: child_block.settings.collection_1,
+                                collection_2: child_block.settings.collection_2,
+                                collection_3: child_block.settings.collection_3,
+                                collection_4: child_block.settings.collection_4,
+                                collection_5: child_block.settings.collection_5,
+                                collection_6: child_block.settings.collection_6,
+                                column_span: child_block.settings.column_span,
+                                aspect_ratio: child_block.settings.aspect_ratio,
+                                show_title: child_block.settings.show_title,
+                                image_border_radius: child_block.settings.image_border_radius,
+                                view_all_url: child_block.settings.view_all_url,
+                                view_all_label: child_block.settings.view_all_label
+                              %}
+                            {% when '_mega-menu-featured-products' %}
+                              {% render 'mega-menu-featured-products-block',
+                                collection: child_block.settings.collection,
+                                products_to_show: child_block.settings.products_to_show,
+                                column_span: child_block.settings.column_span,
+                                aspect_ratio: child_block.settings.aspect_ratio,
+                                show_price: child_block.settings.show_price,
+                                show_vendor: child_block.settings.show_vendor,
+                                view_all_label: child_block.settings.view_all_label
+                              %}
+                            {% when '_mega-menu-brand-grid' %}
+                              {% render 'mega-menu-brand-grid-block',
+                                heading: child_block.settings.heading,
+                                brand_1_image: child_block.settings.brand_1_image,
+                                brand_1_url: child_block.settings.brand_1_url,
+                                brand_1_label: child_block.settings.brand_1_label,
+                                brand_2_image: child_block.settings.brand_2_image,
+                                brand_2_url: child_block.settings.brand_2_url,
+                                brand_2_label: child_block.settings.brand_2_label,
+                                brand_3_image: child_block.settings.brand_3_image,
+                                brand_3_url: child_block.settings.brand_3_url,
+                                brand_3_label: child_block.settings.brand_3_label,
+                                brand_4_image: child_block.settings.brand_4_image,
+                                brand_4_url: child_block.settings.brand_4_url,
+                                brand_4_label: child_block.settings.brand_4_label,
+                                brand_5_image: child_block.settings.brand_5_image,
+                                brand_5_url: child_block.settings.brand_5_url,
+                                brand_5_label: child_block.settings.brand_5_label,
+                                brand_6_image: child_block.settings.brand_6_image,
+                                brand_6_url: child_block.settings.brand_6_url,
+                                brand_6_label: child_block.settings.brand_6_label,
+                                brand_7_image: child_block.settings.brand_7_image,
+                                brand_7_url: child_block.settings.brand_7_url,
+                                brand_7_label: child_block.settings.brand_7_label,
+                                brand_8_image: child_block.settings.brand_8_image,
+                                brand_8_url: child_block.settings.brand_8_url,
+                                brand_8_label: child_block.settings.brand_8_label,
+                                column_span: child_block.settings.column_span,
+                                logo_size: child_block.settings.logo_size,
+                                logos_per_row: child_block.settings.logos_per_row,
+                                grayscale: child_block.settings.grayscale
+                              %}
+                            {% when '_mega-menu-cta-banner' %}
+                              {% render 'mega-menu-cta-banner-block',
+                                heading: child_block.settings.heading,
+                                description: child_block.settings.description,
+                                button_text: child_block.settings.button_text,
+                                button_url: child_block.settings.button_url,
+                                background_image: child_block.settings.background_image,
+                                color_scheme: child_block.settings.color_scheme,
+                                column_span: child_block.settings.column_span
+                              %}
+                          {% endcase %}
+                        {% endif %}
+                      {% endfor %}
+                    {%- else -%}
+                      {%- comment -%} Default behavior: use global menu_style {%- endcomment -%}
+                      {% render 'mega-menu-list',
+                        parent_link: link,
+                        id: list_id,
+                        section: section,
+                        grid_columns_count: block_settings.mega_menu_columns | default: 6,
+                        grid_columns_count_tablet: block_settings.mega_menu_columns_tablet | default: 4,
+                        grid_columns_count_collection_images: 8,
+                        menu_content_type: menu_content_type,
+                        content_aspect_ratio: ratio,
+                        image_border_radius: image_border_radius,
+                        links_before_wrap_setting: block_settings.mega_menu_links_per_column
+                      %}
+                    {%- endif -%}
                   </div>
                 </div>
               </div>
