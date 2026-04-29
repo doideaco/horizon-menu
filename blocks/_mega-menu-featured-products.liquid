@@ -1,0 +1,125 @@
+{%- doc -%}
+  Mega menu featured products block.
+  Rendered by the parent _header-menu block via snippet, not directly.
+{%- enddoc -%}
+
+{% schema %}
+{
+  "name": "Mega: Featured Prods",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "menu_item_title",
+      "label": "Menu item title",
+      "info": "Enter the exact title of the top-level menu item this block belongs to (e.g. 'Men', 'Women'). Case-insensitive."
+    },
+    {
+      "type": "header",
+      "content": "Products"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "label": "Products to show",
+      "min": 2,
+      "max": 6,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "select",
+      "id": "aspect_ratio",
+      "label": "Image ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "Auto"
+        },
+        {
+          "value": "4 / 5",
+          "label": "Portrait (4:5)"
+        },
+        {
+          "value": "1 / 1",
+          "label": "Square (1:1)"
+        }
+      ],
+      "default": "4 / 5"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "Show price",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "Show vendor",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "View all link"
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "View all label",
+      "info": "Links to the selected collection. Leave blank to hide.",
+      "default": "View all"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "column_span",
+      "label": "Column width",
+      "info": "The mega menu grid has 6 columns on desktop.",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 columns"
+        },
+        {
+          "value": "3",
+          "label": "3 columns"
+        },
+        {
+          "value": "4",
+          "label": "4 columns"
+        }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "start",
+          "label": "Before links"
+        },
+        {
+          "value": "end",
+          "label": "After links"
+        }
+      ],
+      "default": "end"
+    }
+  ]
+}
+{% endschema %}

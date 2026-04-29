@@ -1,0 +1,52 @@
+{%- doc -%}
+  Renders a call-to-action banner in the mega menu grid.
+
+  @param {string} heading - Banner heading text.
+  @param {string} description - Banner description text.
+  @param {string} button_text - CTA button text.
+  @param {string} button_url - CTA button link URL.
+  @param {object} background_image - Optional background image.
+  @param {string} color_scheme - Color scheme ID.
+  @param {string} column_span - Number of grid columns to span.
+{%- enddoc -%}
+
+{%- liquid
+  assign col_span = column_span | default: 6
+  assign has_content = false
+  if heading != blank or description != blank or button_text != blank
+    assign has_content = true
+  endif
+-%}
+
+{% if has_content %}
+  <li class="mega-menu__column mega-menu__column--span-{{ col_span }}">
+    <div class="mega-menu__cta-banner color-scheme--{{ color_scheme | default: 'primary' }}">
+      {% if background_image != blank %}
+        <div class="mega-menu__cta-banner-bg">
+          {{
+            background_image
+            | image_url: width: 1200
+            | image_tag:
+              loading: 'lazy',
+              sizes: '(min-width: 990px) 800px, 600px',
+              widths: '400, 600, 800, 1200',
+              class: 'mega-menu__cta-banner-bg-img'
+          }}
+        </div>
+      {% endif %}
+      <div class="mega-menu__cta-banner-content">
+        {% if heading != blank %}
+          <p class="mega-menu__cta-banner-heading">{{ heading }}</p>
+        {% endif %}
+        {% if description != blank %}
+          <p class="mega-menu__cta-banner-description">{{ description }}</p>
+        {% endif %}
+        {% if button_text != blank and button_url != blank %}
+          <a href="{{ button_url }}" class="mega-menu__cta-banner-button button button--primary">
+            {{ button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </li>
+{% endif %}

@@ -1,0 +1,112 @@
+{%- doc -%}
+  Renders a grid of brand logos with links in the mega menu.
+
+  @param {string} heading - Optional heading above the brand grid.
+  @param {object} brand_1_image through brand_8_image - Brand logo images.
+  @param {string} brand_1_url through brand_8_url - Brand link URLs.
+  @param {string} brand_1_label through brand_8_label - Brand name labels (used as alt text).
+  @param {string} column_span - Number of grid columns to span (2, 3, or 4).
+  @param {string} logo_size - Logo size: small, medium, or large.
+  @param {string} logos_per_row - Number of logos per row (2, 3, or 4).
+  @param {boolean} grayscale - Whether to apply grayscale filter.
+{%- enddoc -%}
+
+{%- liquid
+  assign col_span = column_span | default: 3
+  assign size = logo_size | default: 'medium'
+  assign per_row = logos_per_row | default: '4'
+  assign has_brands = false
+
+  if brand_1_image != blank
+    assign has_brands = true
+  elsif brand_2_image != blank
+    assign has_brands = true
+  elsif brand_3_image != blank
+    assign has_brands = true
+  elsif brand_4_image != blank
+    assign has_brands = true
+  elsif brand_5_image != blank
+    assign has_brands = true
+  elsif brand_6_image != blank
+    assign has_brands = true
+  elsif brand_7_image != blank
+    assign has_brands = true
+  elsif brand_8_image != blank
+    assign has_brands = true
+  endif
+
+  case size
+    when 'small'
+      assign logo_max_width = '60px'
+      assign logo_img_width = 120
+    when 'large'
+      assign logo_max_width = '120px'
+      assign logo_img_width = 240
+    else
+      assign logo_max_width = '90px'
+      assign logo_img_width = 180
+  endcase
+-%}
+
+{% if has_brands %}
+  <li class="mega-menu__column mega-menu__column--span-{{ col_span }}">
+    {% if heading != blank %}
+      <span class="mega-menu__link mega-menu__link--parent">
+        <span class="wrap-text">{{ heading }}</span>
+      </span>
+    {% endif %}
+    <div class="mega-menu__brand-grid" style="--brand-logos-per-row: {{ per_row }}; --brand-logo-max-width: {{ logo_max_width }};">
+      {% for i in (1..8) %}
+        {%- liquid
+          case i
+            when 1
+              assign img = brand_1_image
+              assign url = brand_1_url
+              assign label = brand_1_label
+            when 2
+              assign img = brand_2_image
+              assign url = brand_2_url
+              assign label = brand_2_label
+            when 3
+              assign img = brand_3_image
+              assign url = brand_3_url
+              assign label = brand_3_label
+            when 4
+              assign img = brand_4_image
+              assign url = brand_4_url
+              assign label = brand_4_label
+            when 5
+              assign img = brand_5_image
+              assign url = brand_5_url
+              assign label = brand_5_label
+            when 6
+              assign img = brand_6_image
+              assign url = brand_6_url
+              assign label = brand_6_label
+            when 7
+              assign img = brand_7_image
+              assign url = brand_7_url
+              assign label = brand_7_label
+            when 8
+              assign img = brand_8_image
+              assign url = brand_8_url
+              assign label = brand_8_label
+          endcase
+        -%}
+        {% if img != blank %}
+          <{% if url != blank %}a href="{{ url }}"{% else %}div{% endif %} class="mega-menu__brand-item{% if grayscale %} mega-menu__brand-item--grayscale{% endif %}" {% if label != blank %}title="{{ label }}"{% endif %}>
+            {{
+              img
+              | image_url: width: logo_img_width
+              | image_tag:
+                loading: 'lazy',
+                alt: label,
+                class: 'mega-menu__brand-logo',
+                widths: '60, 90, 120, 180, 240'
+            }}
+          </{% if url != blank %}a{% else %}div{% endif %}>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </li>
+{% endif %}

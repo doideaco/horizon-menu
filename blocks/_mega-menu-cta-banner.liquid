@@ -1,0 +1,106 @@
+{%- doc -%}
+  Mega menu call-to-action banner block.
+  A horizontal banner with text and CTA button, ideal for promotions and sales.
+  Rendered by the parent _header-menu block via snippet, not directly.
+{%- enddoc -%}
+
+{% schema %}
+{
+  "name": "Mega menu: CTA Banner",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "menu_item_title",
+      "label": "Menu item title",
+      "info": "Enter the exact title of the top-level menu item this block belongs to (e.g. 'Men', 'Women'). Case-insensitive."
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Shop now"
+    },
+    {
+      "type": "url",
+      "id": "button_url",
+      "label": "Button link"
+    },
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background image",
+      "info": "Optional. Displays behind the text."
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "primary"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "column_span",
+      "label": "Column width",
+      "info": "The mega menu grid has 6 columns on desktop.",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 columns"
+        },
+        {
+          "value": "3",
+          "label": "3 columns"
+        },
+        {
+          "value": "4",
+          "label": "4 columns"
+        },
+        {
+          "value": "6",
+          "label": "Full width"
+        }
+      ],
+      "default": "6"
+    },
+    {
+      "type": "select",
+      "id": "position",
+      "label": "Position",
+      "options": [
+        {
+          "value": "start",
+          "label": "Before links"
+        },
+        {
+          "value": "end",
+          "label": "After links"
+        }
+      ],
+      "default": "end"
+    }
+  ]
+}
+{% endschema %}
