@@ -719,8 +719,10 @@
       text-transform: var(--menu-child-font-case);
       color: var(--color-foreground);
       transition: var(--submenu-content-animation);
-      /* Stretch link to full column width and put title left, chevron right. */
+      /* Override base .menu-list__link's flex-direction:column so the title
+         and chevron sit side-by-side and space-between can right-align the chevron. */
       display: flex;
+      flex-direction: row;
       align-items: center;
       justify-content: space-between;
       gap: 0.5em;
@@ -731,16 +733,24 @@
       }
     }
 
-    /* Chevron indicator on overflow items that have a submenu, right-aligned. */
+    /* Chevron indicator on overflow items that have a submenu, right-aligned.
+       Resets the base .menu-list__link::after (safety-box pseudo) which is
+       position:absolute and would not participate in flex layout. */
     .menu-list__link[aria-haspopup='true']::after {
       content: '';
+      position: static;
+      display: block;
+      top: auto;
+      left: auto;
+      right: auto;
+      bottom: auto;
       width: 0.5em;
       height: 0.5em;
       border-right: 1.5px solid currentColor;
       border-top: 1.5px solid currentColor;
       transform: rotate(45deg);
       opacity: 0.55;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition: opacity 0.2s ease;
       flex-shrink: 0;
       margin-block-start: -0.1em;
     }
