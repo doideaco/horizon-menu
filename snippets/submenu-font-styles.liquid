@@ -12,6 +12,10 @@ var(--font-
 --weight); --menu-parent-font-case:
 {% if settings.type_case_primary_link == 'uppercase' %}uppercase{% else %}none{% endif %};
 {% case settings.menu_font_style %}
+  {% when 'extra_small' %}
+    --menu-parent-font-size: var(--menu-font-sm--size); --menu-parent-font-line-height:
+    var(--menu-font-sm--line-height); --menu-parent-font-color: var(--color-foreground);
+    --menu-parent-active-font-color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
   {% when 'regular' %}
     --menu-parent-font-size: var(--menu-font-md--size); --menu-parent-font-line-height:
     var(--menu-font-md--line-height); --menu-parent-font-color: var(--color-foreground);
@@ -33,6 +37,10 @@ var(--font-
 --weight); --menu-child-font-case:
 {% if settings.type_case_primary_link == 'uppercase' %}uppercase{% else %}none{% endif %};
 {% case settings.menu_font_style %}
+  {% when 'extra_small' %}
+    --menu-child-font-size: 0.75rem; --menu-child-font-line-height: 1.6;
+    --menu-child-font-color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
+    --menu-child-active-font-color: var(--color-foreground);
   {% when 'regular' %}
     --menu-child-font-size: var(--menu-font-sm--size); --menu-child-font-line-height: var(--menu-font-sm--line-height);
     --menu-child-font-color: rgb(var(--color-foreground-rgb) / var(--opacity-subdued-text));
