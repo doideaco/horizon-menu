@@ -131,6 +131,7 @@
                     class="mega-menu__grid"
                     data-menu-grid-id="{{ list_id }}"
                   >
+                    <h3 class="mega-menu__heading">{{ link.title }}</h3>
                     {%- if has_enhancements -%}
                       {%- comment -%} Render 'start' position enhancement blocks {%- endcomment -%}
                       {% for child_block in block.blocks %}
@@ -727,6 +728,8 @@
       justify-content: space-between;
       gap: 0.5em;
       width: 100%;
+      /* Breathing room between overflow items. */
+      padding-block: 0.55em;
 
       &:hover {
         color: var(--menu-parent-active-font-color);
@@ -897,6 +900,21 @@
     @media screen and (min-width: 990px) {
       grid-template-columns: repeat(var(--menu-columns-desktop), minmax(0, 1fr));
     }
+  }
+
+  /* Bold menu heading at the top of every mega menu / overflow submenu. */
+  .mega-menu__heading {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding-block-end: var(--padding-xs);
+    font-family: var(--menu-parent-font-family);
+    font-style: var(--menu-parent-font-style);
+    font-weight: 700;
+    font-size: var(--menu-parent-font-size);
+    line-height: var(--menu-parent-font-line-height);
+    text-transform: var(--menu-parent-font-case);
+    color: var(--color-foreground);
+    border-block-end: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
   }
 
   .mega-menu__column {
