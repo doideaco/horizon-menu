@@ -113,7 +113,7 @@
               <div
                 id="submenu-{{ forloop.index }}"
                 class="menu-list__submenu-inner"
-                style="{% render 'submenu-font-styles', settings: block_settings %}"
+                style="{% render 'submenu-font-styles', settings: block_settings %} --mega-menu-h-gap: {{ block_settings.mega_menu_horizontal_gap | default: 'var(--gap-2xl)' }}; --mega-menu-v-gap: {{ block_settings.mega_menu_vertical_gap | default: 'var(--gap-xl)' }}; --mega-menu-padding: {{ block_settings.mega_menu_padding | default: 'var(--padding-lg)' }};"
               >
                 {% assign list_id = 'MegaMenuList-' | append: forloop.index %}
                 <div class="mega-menu section section--full-width-margin section--{{ section.settings.section_width }}">
@@ -125,12 +125,13 @@
                       parent_link: link,
                       id: list_id,
                       section: section,
-                      grid_columns_count: 6,
-                      grid_columns_count_tablet: 4,
+                      grid_columns_count: block_settings.mega_menu_columns | default: 6,
+                      grid_columns_count_tablet: block_settings.mega_menu_columns_tablet | default: 4,
                       grid_columns_count_collection_images: 8,
                       menu_content_type: menu_content_type,
                       content_aspect_ratio: ratio,
-                      image_border_radius: image_border_radius
+                      image_border_radius: image_border_radius,
+                      links_before_wrap_setting: block_settings.mega_menu_links_per_column
                     %}
                   </div>
                 </div>
@@ -157,6 +158,7 @@
     <header-menu
       ref="headerMenu"
       class="header-menu"
+      style="{% render 'submenu-font-sizes', settings: block_settings %}"
       {{ block.shopify_attributes }}
       data-hydration-key="header-menu"
     >
