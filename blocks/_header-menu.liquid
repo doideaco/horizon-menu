@@ -254,8 +254,8 @@
   }
 
   .menu-list {
-    --menu-horizontal-gap: var(--gap-xl);
-    --menu-vertical-gap: var(--gap-xl);
+    --menu-horizontal-gap: var(--mega-menu-h-gap, var(--gap-2xl));
+    --menu-vertical-gap: var(--mega-menu-v-gap, var(--gap-xl));
 
     display: flex;
     height: 100%;
@@ -375,8 +375,8 @@
   /** mega menu **/
   .menu-list__submenu,
   .overflow-menu::part(overflow) {
-    --submenu-padding-block-start: var(--padding-3xl);
-    --submenu-padding-block-end: var(--padding-3xl);
+    --submenu-padding-block-start: var(--mega-menu-padding, var(--padding-3xl));
+    --submenu-padding-block-end: var(--mega-menu-padding, var(--padding-3xl));
 
     background-color: transparent;
   }
@@ -425,8 +425,6 @@
   }
 
   .overflow-menu::part(overflow) {
-    --menu-top-level-font-size: var(--font-size--xlarge);
-
     display: grid;
     grid-template-columns: var(--full-page-grid-with-margins);
   }
@@ -434,10 +432,10 @@
   .overflow-menu::part(overflow-list) {
     position: relative;
     display: grid;
-    grid-template-columns: minmax(auto, 200px) 1fr;
+    grid-template-columns: minmax(auto, 250px) 1fr;
     grid-template-areas: 'left right';
     grid-template-rows: max-content;
-    grid-gap: 0;
+    grid-gap: 0 var(--menu-horizontal-gap);
     grid-column: 2;
   }
 
@@ -452,8 +450,18 @@
       grid-area: left;
       grid-row: auto;
       height: min-content;
-      font-size: var(--font-size--xl);
+      font-family: var(--menu-parent-font-family);
+      font-style: var(--menu-parent-font-style);
+      font-weight: var(--menu-parent-font-weight);
+      font-size: var(--menu-parent-font-size);
+      line-height: var(--menu-parent-font-line-height);
+      text-transform: var(--menu-parent-font-case);
+      color: var(--color-foreground);
       transition: var(--submenu-content-animation);
+
+      &:hover {
+        color: var(--menu-parent-active-font-color);
+      }
     }
 
     .menu-list__submenu {
@@ -611,6 +619,18 @@
     grid-column: span 4;
   }
 
+  .mega-menu__column--span-5 {
+    grid-column: span 5;
+  }
+
+  .mega-menu__column--span-6 {
+    grid-column: span 6;
+  }
+
+  .mega-menu__columns {
+    column-gap: var(--menu-horizontal-gap);
+  }
+
   .mega-menu__column--wide-collection-image {
     grid-column: span 1;
 
@@ -672,15 +692,34 @@
     grid-column: 1;
   }
 
+  /* Overflow ("More") panel: collapse the mega-menu's grid into the right-hand column.
+     Wider columns + force fewer cols so child links don't wrap awkwardly. */
+  .menu-list__list-item[slot='overflow'] .mega-menu__grid[data-menu-grid-id] {
+    --menu-columns-desktop: 3 !important;
+    --menu-columns-tablet: 2 !important;
+  }
+
+  .menu-list__list-item[slot='overflow'] .mega-menu__list[data-menu-list-id] {
+    --menu-columns-desktop: 3 !important;
+    --menu-columns-tablet: 2 !important;
+  }
+
+  .menu-list__list-item[slot='overflow'] .mega-menu__column {
+    grid-column: 1 / -1;
+  }
+
+  .menu-list__list-item[slot='overflow'] .mega-menu__columns {
+    column-count: 2 !important;
+  }
+
   .mega-menu__content-list li {
     white-space: normal;
   }
 
   /* mega more menu */
   .mega-menu__more-list {
-    --menu-child-font-size: var(--font-size--xl);
-
-    width: 200px;
+    width: auto;
+    min-width: 200px;
   }
 
   .mega-menu__submenu {
