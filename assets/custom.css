@@ -8,18 +8,38 @@
   }
 }
 
-.gm-links>.gm-heading, .gm-products-carousel .gm-heading, .gm-products-grid .gm-heading, .gm-products-list .gm-heading {
-    padding: 4px 0;
+/* ===================================
+   Block Globo Mega Menu app
+   Prevents Globo from replacing the
+   native Horizon mega menu.
+   =================================== */
+
+/* Hide all Globo rendered elements */
+.gm-menu,
+.gm-menu-installed,
+.gm-overlay,
+.gm-retractor,
+[class^="gm-"],
+[id*="globoMenu"],
+[data-menu-id] {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
 }
 
-.gm-submenu {
-    padding: 20px;
+/* Ensure native Horizon header menu is always visible
+   (Globo adds display:none to the native nav) */
+header-menu,
+.header-menu,
+.menu-list,
+nav[aria-label] {
+  display: flex !important;
+  visibility: visible !important;
 }
 
-.gm-links>li.gm-heading>.gm-target, .gm-links>li.gm-heading>a {
-    padding: 2px 0;
-}
-
-.gm-menu-installed .gm-menu .gm-grid {
-    gap: 20px;
+/* Undo any Globo overrides on the header */
+.header .gm-menu-installed,
+.header [data-globo],
+#header-component .gm-menu-installed {
+  display: none !important;
 }
