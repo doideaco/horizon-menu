@@ -941,6 +941,12 @@
     transition-delay: 0s;
   }
 
+  /* Halve the overflow-list top padding now that a heading sits above it,
+     to close the visual gap between heading and first item. */
+  .overflow-menu::part(overflow-list) {
+    padding-block-start: calc(var(--submenu-padding-block-start) / 2);
+  }
+
   .mega-menu__column {
     grid-column: span 1;
   }
