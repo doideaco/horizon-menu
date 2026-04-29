@@ -922,9 +922,23 @@
 
   /* Overflow ("More") panel heading: align with the right-hand grid column
      where the overflow items render, so it doesn't span the unused left margin.
-     Slotted into the overflow-list shadow DOM but styled here in light DOM. */
+     Slotted into the overflow-list shadow DOM but styled here in light DOM.
+     Explicitly tie its visibility to the overflow panel state (hover or
+     active) since visibility inheritance through shadow DOM slots isn't
+     reliable across browsers. */
   .mega-menu__heading--overflow {
     grid-column: 2;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 250ms ease, visibility 0s 250ms;
+  }
+
+  .overflow-menu:hover .mega-menu__heading--overflow,
+  .overflow-menu:has(.menu-list__link[aria-expanded='true']) .mega-menu__heading--overflow,
+  header-menu[data-overflow-expanded='true'] .mega-menu__heading--overflow {
+    visibility: visible;
+    opacity: 1;
+    transition-delay: 0s;
   }
 
   .mega-menu__column {
