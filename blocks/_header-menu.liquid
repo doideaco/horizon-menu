@@ -709,18 +709,46 @@
       grid-area: left;
       grid-row: auto;
       height: min-content;
-      font-family: var(--menu-parent-font-family);
-      font-style: var(--menu-parent-font-style);
-      font-weight: var(--menu-parent-font-weight);
-      font-size: var(--menu-parent-font-size);
-      line-height: var(--menu-parent-font-line-height);
-      text-transform: var(--menu-parent-font-case);
+      /* Match the child-link size used in regular mega menus so
+         all dropdown menus have a unified type scale. */
+      font-family: var(--menu-child-font-family);
+      font-style: var(--menu-child-font-style);
+      font-weight: var(--menu-child-font-weight);
+      font-size: var(--menu-child-font-size);
+      line-height: var(--menu-child-font-line-height);
+      text-transform: var(--menu-child-font-case);
       color: var(--color-foreground);
       transition: var(--submenu-content-animation);
 
       &:hover {
         color: var(--menu-parent-active-font-color);
       }
+    }
+
+    /* Chevron indicator on overflow items that have a submenu. */
+    .menu-list__link[aria-haspopup='true'] .menu-list__link-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+    }
+
+    .menu-list__link[aria-haspopup='true'] .menu-list__link-title::after {
+      content: '';
+      width: 0.5em;
+      height: 0.5em;
+      border-right: 1.5px solid currentColor;
+      border-top: 1.5px solid currentColor;
+      transform: rotate(45deg);
+      opacity: 0.55;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      flex-shrink: 0;
+      align-self: center;
+      margin-block-start: -0.1em;
+    }
+
+    .menu-list__link[aria-haspopup='true']:hover .menu-list__link-title::after,
+    .menu-list__link[aria-expanded='true'] .menu-list__link-title::after {
+      opacity: 1;
     }
 
     .menu-list__submenu {
