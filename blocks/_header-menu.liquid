@@ -742,6 +742,10 @@
       "label": "t:settings.submenu_size",
       "options": [
         {
+          "value": "extra_small",
+          "label": "Extra small (12px)"
+        },
+        {
           "value": "regular",
           "label": "t:options.small"
         },
@@ -795,6 +799,149 @@
         }
       ],
       "default": "none"
+    },
+    {
+      "type": "header",
+      "content": "Mega menu layout"
+    },
+    {
+      "type": "select",
+      "id": "mega_menu_columns",
+      "label": "Desktop columns",
+      "info": "Number of grid columns for the mega menu dropdown on desktop.",
+      "options": [
+        {
+          "value": "4",
+          "label": "4 columns"
+        },
+        {
+          "value": "5",
+          "label": "5 columns"
+        },
+        {
+          "value": "6",
+          "label": "6 columns"
+        },
+        {
+          "value": "8",
+          "label": "8 columns"
+        }
+      ],
+      "default": "6"
+    },
+    {
+      "type": "select",
+      "id": "mega_menu_columns_tablet",
+      "label": "Tablet columns",
+      "options": [
+        {
+          "value": "2",
+          "label": "2 columns"
+        },
+        {
+          "value": "3",
+          "label": "3 columns"
+        },
+        {
+          "value": "4",
+          "label": "4 columns"
+        }
+      ],
+      "default": "4"
+    },
+    {
+      "type": "range",
+      "id": "mega_menu_links_per_column",
+      "label": "Links before column break",
+      "info": "Max child links shown in a column before wrapping to the next.",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 10
+    },
+    {
+      "type": "header",
+      "content": "Mega menu spacing"
+    },
+    {
+      "type": "select",
+      "id": "mega_menu_horizontal_gap",
+      "label": "Column gap",
+      "options": [
+        {
+          "value": "var(--gap-sm)",
+          "label": "Small (11px)"
+        },
+        {
+          "value": "var(--gap-lg)",
+          "label": "Medium (16px)"
+        },
+        {
+          "value": "var(--gap-xl)",
+          "label": "Large (20px)"
+        },
+        {
+          "value": "var(--gap-2xl)",
+          "label": "Extra large (32px)"
+        },
+        {
+          "value": "var(--gap-3xl)",
+          "label": "Wide (48px)"
+        }
+      ],
+      "default": "var(--gap-2xl)"
+    },
+    {
+      "type": "select",
+      "id": "mega_menu_vertical_gap",
+      "label": "Row gap",
+      "options": [
+        {
+          "value": "var(--gap-sm)",
+          "label": "Small (11px)"
+        },
+        {
+          "value": "var(--gap-lg)",
+          "label": "Medium (16px)"
+        },
+        {
+          "value": "var(--gap-xl)",
+          "label": "Large (20px)"
+        },
+        {
+          "value": "var(--gap-2xl)",
+          "label": "Extra large (32px)"
+        },
+        {
+          "value": "var(--gap-3xl)",
+          "label": "Wide (48px)"
+        }
+      ],
+      "default": "var(--gap-xl)"
+    },
+    {
+      "type": "select",
+      "id": "mega_menu_padding",
+      "label": "Dropdown padding",
+      "options": [
+        {
+          "value": "var(--padding-md)",
+          "label": "Small"
+        },
+        {
+          "value": "var(--padding-lg)",
+          "label": "Medium"
+        },
+        {
+          "value": "var(--padding-xl)",
+          "label": "Large"
+        },
+        {
+          "value": "var(--padding-2xl)",
+          "label": "Extra large"
+        }
+      ],
+      "default": "var(--padding-lg)"
     },
     {
       "type": "header",
@@ -913,6 +1060,14 @@
       "label": "t:settings.dividers",
       "default": false
     }
+  ],
+  "blocks": [
+    { "type": "_mega-menu-promo-image" },
+    { "type": "_mega-menu-collection-list" },
+    { "type": "_mega-menu-featured-products" },
+    { "type": "_mega-menu-custom-links" },
+    { "type": "_mega-menu-brand-grid" },
+    { "type": "_mega-menu-cta-banner" }
   ]
 }
 {% endschema %}
