@@ -83,6 +83,9 @@
     %}
 
     {% capture children %}
+      <h3 slot="overflow-heading" class="mega-menu__heading mega-menu__heading--overflow">
+        {{- 'actions.more' | t -}}
+      </h3>
       {% for link in block_settings.menu.links %}
         <li
           role="presentation"
@@ -915,6 +918,14 @@
     text-transform: var(--menu-parent-font-case);
     color: var(--color-foreground);
     border-block-end: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+  }
+
+  /* Overflow ("More") panel heading: align with the right-hand grid column
+     where the overflow items render, so it doesn't span the unused left margin.
+     Slotted into the overflow-list shadow DOM but styled here in light DOM. */
+  .mega-menu__heading--overflow {
+    grid-column: 2;
+    margin-block-end: var(--padding-md);
   }
 
   .mega-menu__column {
