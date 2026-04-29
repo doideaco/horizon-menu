@@ -920,6 +920,13 @@
     color: var(--color-foreground);
   }
 
+  /* Inside the regular mega-menu grid, the row-gap creates a 20px+ visual
+     gap below the heading. Use a negative margin-block-end to absorb half
+     the row-gap, so the heading sits visually closer to its menu items. */
+  .mega-menu__grid > .mega-menu__heading {
+    margin-block-end: calc(var(--menu-vertical-gap, 1.25rem) * -0.5);
+  }
+
   /* Overflow ("More") panel heading: align with the right-hand grid column
      where the overflow items render, so it doesn't span the unused left margin.
      Slotted into the overflow-list shadow DOM but styled here in light DOM.
@@ -941,10 +948,10 @@
     transition-delay: 0s;
   }
 
-  /* Halve the overflow-list top padding now that a heading sits above it,
+  /* Tighten the overflow-list top padding now that a heading sits above it,
      to close the visual gap between heading and first item. */
   .overflow-menu::part(overflow-list) {
-    padding-block-start: calc(var(--submenu-padding-block-start) / 2);
+    padding-block-start: calc(var(--submenu-padding-block-start) / 4);
   }
 
   .mega-menu__column {
