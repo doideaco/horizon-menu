@@ -259,8 +259,15 @@ class HeaderMenu extends Component {
     const isMovingWithinMenu = event.relatedTarget instanceof Node && menu?.contains(document.activeElement);
     const isMovingToSubmenu =
       event.relatedTarget instanceof Node && event.type === 'blur' && menu?.contains(event.relatedTarget);
+    // Treat any element inside the overflow-list web component (including its
+    // slotted content like the "More" heading and individual overflow items)
+    // as still being inside the More menu — don't deactivate.
     const isMovingToOverflowMenu =
-      event.relatedTarget instanceof Node && event.relatedTarget.parentElement?.matches('[slot="overflow"]');
+      event.relatedTarget instanceof Node &&
+      (event.relatedTarget.parentElement?.matches('[slot="overflow"]') ||
+        event.relatedTarget instanceof Element &&
+          (event.relatedTarget.matches('[slot="overflow-heading"]') ||
+            this.overflowMenu?.contains(event.relatedTarget)));
 
     if (isMovingWithinMenu || isMovingToOverflowMenu || isMovingToSubmenu) {
       if (this.#state.activeItem) {
